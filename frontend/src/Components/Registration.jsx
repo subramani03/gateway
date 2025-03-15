@@ -8,19 +8,6 @@ import { BASE_URL } from '../Utils/constants';
 const Registration = () => {
 
     const navigate = useNavigate();
-    // const notify = () => {
-    //     toast.success("Registered successfully!", {
-    //       position: "top-right",
-    //       autoClose: 3000,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //       theme: "light",
-    //     });
-    //   };
-
 
     const [formData, setFormData] = useState({
         Participant1_Name: "",
@@ -126,13 +113,13 @@ const Registration = () => {
                         <legend className="fieldset-legend font-semibold mb-1">Participant 2 Name</legend>
                         <input type="text" placeholder="Type here" name="Participant2_Name" value={formData.Participant2_Name} onChange={handleChange}
                             className="input w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary "
-                            required />
+                            />
                     </fieldset>
                     <fieldset className="fieldset">
                         <legend className="fieldset-legend font-semibold mb-1">Participant 2 Rollno</legend>
                         <input type="text" placeholder="Type here" name="Participant2_rollno" value={formData.Participant2_rollno} onChange={handleChange}
                             className="input w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary "
-                            required />
+                            />
                     </fieldset>
 
                     <fieldset className="fieldset">

@@ -6,32 +6,38 @@ const EventSchema = mongoose.Schema(
         Participant1_Name: {
           type: String,
           required: true,
-          minLength: 4,
+          trim:true,
+          minLength: 2,
           maxLength: 50,
         },
         Participant1_rollno: {
           type: String,
           required: true,
+          trim:true,
+          lowercase: true,
           minLength: 1,
           maxLength: 10,
         },
         Participant2_Name: {
           type: String,
-          required: true,
-          minLength: 4,
+          trim:true,
+          minLength: 2,
           maxLength: 50,
         },
         Participant2_rollno: {
           type: String,
-          required: true,
+          trim:true,
           minLength: 1,
+          lowercase: true,
           maxLength: 10,
         },
         college: {
           type: String,
           required: true,
-          minLength: 4,
+          minLength: 3,
+          trim:true,
           maxLength: 50,
+          lowercase: true,
         },
         events: {
             type: String,
@@ -42,6 +48,7 @@ const EventSchema = mongoose.Schema(
         phoneNo: {
           type:String,
           required: true,
+          trim:true,
           minLength: 10,
           maxLength: 10,
           validate(value) {
