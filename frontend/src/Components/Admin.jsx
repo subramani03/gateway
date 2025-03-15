@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 // import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import {BASE_URL} from '../Utils/constants.js'
 
 const Admin = () => {
   const [RegistrationDetails, setRegistrationDetails] = useState([]);
@@ -15,7 +16,7 @@ const Admin = () => {
   // Check authentication from the backend
   const checkAuth = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/checkAuth", {
+      const response = await axios.get(`${BASE_URL}checkAuth`, {
         withCredentials: true, // Ensures cookies are sent with the request
       });
 
@@ -47,7 +48,7 @@ const Admin = () => {
 
   const fetchRegistrationData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/getregisterationdetails", {
+      const response = await axios.get(`${BASE_URL}getregisterationdetails`, {
         withCredentials: true,
       });
       setRegistrationDetails(response.data);
@@ -59,7 +60,7 @@ const Admin = () => {
 
   const deleteRecords = async () => {
     try {
-      await axios.delete("http://localhost:3000/deteteRegistration", {
+      await axios.delete(`${BASE_URL}deteteRegistration`, {
         withCredentials: true,
       });
       setFilterRegistrationDetails([]);

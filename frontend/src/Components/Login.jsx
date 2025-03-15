@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer ,toast } from 'react-toastify'
+import { BASE_URL } from '../Utils/constants';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Login = () => {
         e.preventDefault();
         console.log(formData);
         try {
-            const res =await axios.post("http://localhost:3000/adminLogin", {
+            const res =await axios.post(`${BASE_URL}adminLogin`, {
                 formData
             },{
                 withCredentials: true,

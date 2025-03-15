@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BASE_URL } from '../Utils/constants';
 
 const Registration = () => {
 
@@ -67,7 +68,7 @@ const Registration = () => {
     const handleSubmit = async (e) => {
         try {
             e.preventDefault();
-            let res = await axios.post("http://localhost:3000/register", {
+            let res = await axios.post(`${BASE_URL}register`, {
                 formData
             });
             toast.success(res.data, {
