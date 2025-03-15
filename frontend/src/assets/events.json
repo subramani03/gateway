@@ -1,0 +1,64 @@
+{
+    "events": [
+        {
+            "id": 1,
+            "name": "WebClash",
+            "date": "2021-01-01",
+            "location": "Location 1",
+            "imgUrl": "https://img.freepik.com/premium-photo/black-background-with-word-web-design-it_939033-77173.jpg",
+            "time": "10:00",    
+            "description": "Web desiging",
+            "rules": [
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at.Minima vel voluptatum, veniam ratione inventore ea?  Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. "
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Run baby run",
+            "date": "2021-02-02",
+            "location": "Location 2",
+            "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQMm-XjqGWX9j0G0lXFw2JJCqX16SVLXPJYEh0tSO5Kpk-qzu_n9ITyJwdtAqI5hTqGok&usqp=CAU",
+            "time": "10:00",    
+            "description": "Treasure Hunt",
+            "rules": [
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at.Minima vel voluptatum, veniam ratione inventore ea?  Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. "
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Kissik",
+            "date": "2021-03-03",
+            "location": "Location 3",
+            "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0sR4h2BVLGL5ZzFOkOrZ-xNWDCDcsTBJPpYfrB5W2Yaq4W47AmwqPlHjbZzjXyoj09Rw&usqp=CAU",
+            "time": "10:00",    
+            "description": "Photography",
+            "rules": [
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at.Minima vel voluptatum, veniam ratione inventore ea?  Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. "
+            ]
+        },
+        {
+            "id": 4,
+            "name": "logomania",
+            "date": "2021-01-01",
+            "location": "Location 3",
+            "imgUrl": "https://i.pinimg.com/736x/f0/ab/1a/f0ab1aed22265a50d92c81c66d742c7b.jpg",
+            "time": "10:00",    
+            "description": "Logo desinging",
+            "rules": [
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at.Minima vel voluptatum, veniam ratione inventore ea?  Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+                "Lorem ipsum dolor sit amet, consectetur adipisicing elit. "
+            ]
+        }
+    ]
+}
