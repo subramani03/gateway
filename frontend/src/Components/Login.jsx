@@ -47,27 +47,29 @@ const Login = () => {
                 <h2 className="text-2xl font-bold text-center text-primary mb-4">Login</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <fieldset className="fieldset">
-                        <legend className="fieldset-legend font-semibold mb-3">User Name</legend>
+                        <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs">User Name</legend>
                         <input type="text" placeholder="Type here"
                             name="username"
                             value={formData.username}
                             onChange={handleChange}
-                            className="input w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
+                            className="input text-sm w-full  border border-primary rounded-lg focus:ring focus:ring-primary"
                             required />
                     </fieldset>
                     <fieldset className="fieldset">
-                        <legend className="fieldset-legend font-semibold mb-3">Password</legend>
+                        <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs">Password</legend>
                         <input type="password" placeholder="Type here" name="password"
-                            value={formData.password} onChange={handleChange} className="input w-full mb-5 p-3 border border-primary rounded-lg focus:ring focus:ring-primary" required />
+                            value={formData.password} onChange={handleChange} className="input text-sm w-full mb-5  border border-primary rounded-lg focus:ring focus:ring-primary" required />
                     </fieldset>
 
+                    <div className='flex justify-center '>
                     <button
                         type="submit"
                         // onClick={notify}
-                        className="w-full  font-bold  border-primary border text-xl text-primary  rounded-full p-3 hover:bg-primary hover:text-white transition"
+                        className=" text-xs md:text-sm w-32 py-2 px-3  font-bold  border-primary border text-xl text-primary  rounded-full p-3 hover:bg-primary hover:text-white transition"
                     >
                         Login
                     </button>
+                    </div>
                     <ToastContainer />
                 </form>
             </div>

@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BASE_URL } from '../Utils/constants';
+import { useSelector } from 'react-redux';
 
 const Registration = () => {
-
     const navigate = useNavigate();
-
+    const isRegistrationClose = useSelector(state =>state.registration);
     const [formData, setFormData] = useState({
         Participant1_Name: "",
         Participant1_rollno: "",
@@ -79,59 +79,57 @@ const Registration = () => {
             });
         }
     }
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log(formData);
-    //     alert("Registration successful!");
-    // };
-
-    return (
+    console.log(isRegistrationClose); 
+    {return isRegistrationClose?(
+        <div className='flex justify-center items-center h-96'>
+            <p className='font-semibold'>We're sorry, but registration is currently closed. Stay tuned for upcoming opportunities!</p>   
+        </div>
+         ):(
         <div className="flex items-center justify-center min-h-screen p-4 mt-10">
             <div className="bg-zinc-950 p-8 rounded-lg shadow-xl w-full max-w-md">
                 <div className="flex justify-center">
                 </div>
-                <h2 className="text-2xl font-bold text-center text-primary mb-4">Registration Form</h2>
+                <h2 className="text-xl md:text-2xl font-bold text-center text-primary mb-4">Registration Form</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <fieldset className="fieldset">
-                        <legend className="fieldset-legend font-semibold mb-1">Participant 1 Name</legend>
+                        <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Participant 1 Name</legend>
                         <input type="text" placeholder="Type here"
                             name="Participant1_Name"
                             value={formData.Participant1_Name}
                             onChange={handleChange}
-                            className="input w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
+                            className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
                             required />
                     </fieldset>
                     <fieldset className="fieldset">
-                        <legend className="fieldset-legend font-semibold mb-1">Participant 1 Rollno</legend>
+                        <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs">Participant 1 Rollno</legend>
                         <input type="text" placeholder="Type here" name="Participant1_rollno" value={formData.Participant1_rollno} onChange={handleChange}
-                            className="input w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
+                            className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
                             required />
                     </fieldset>
 
                     <fieldset className="fieldset">
-                        <legend className="fieldset-legend font-semibold mb-1">Participant 2 Name</legend>
+                        <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs">Participant 2 Name</legend>
                         <input type="text" placeholder="Type here" name="Participant2_Name" value={formData.Participant2_Name} onChange={handleChange}
-                            className="input w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary "
+                            className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary "
                             />
                     </fieldset>
                     <fieldset className="fieldset">
-                        <legend className="fieldset-legend font-semibold mb-1">Participant 2 Rollno</legend>
+                        <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs">Participant 2 Rollno</legend>
                         <input type="text" placeholder="Type here" name="Participant2_rollno" value={formData.Participant2_rollno} onChange={handleChange}
-                            className="input w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary "
+                            className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary "
                             />
                     </fieldset>
 
                     <fieldset className="fieldset">
-                        <legend className="fieldset-legend font-semibold mb-1">College Name</legend>
+                        <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs">College Name</legend>
                         <input type="text" placeholder="Type here" name="college" value={formData.college} onChange={handleChange}
-                            className="input w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
+                            className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
                             required />
                     </fieldset>
                     <fieldset className="fieldset">
-                        <legend className="fieldset-legend font-semibold mb-1">Phone no</legend>
+                        <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs">Phone no</legend>
                         <input type="text" placeholder="Type here" name="phoneNo" value={formData.phoneNo} onChange={handleChange}
-                            className="input w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
+                            className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
                             required />
                     </fieldset>
 
@@ -147,7 +145,7 @@ const Registration = () => {
                     </fieldset> */}
 
                     <fieldset className="fieldset p-2 bg-base-100 border border-primary rounded-lg w-full">
-                        <legend className="fieldset-legend font-bold">Select Events</legend>
+                        <legend className="fieldset-legend font-bold md:text-sm text-xs">Select Events</legend>
 
                         {
                             EventOption.map((events, index) => {
@@ -159,43 +157,29 @@ const Registration = () => {
                                             checked={EventChecked.includes(events)}
                                             onClick={(e) => { handleEventChecked(e) }}
                                             disabled={!EventChecked.includes(events) && EventChecked.length >= 3}
-                                            className="checkbox checkbox-accent border-primary rounded-md checked:bg-primary" />
+                                            className="checkbox text-sm checkbox-accent border-primary rounded-md checked:bg-primary" />
                                         {events}
                                     </label>
                                 )
                             })
                         }
-                        {/* <label className="fieldset-label flex items-center gap-2 my-2">
-                            <input type="checkbox"  className="checkbox" />
-                             Event1
-                        </label>
-                        <label className="fieldset-label flex items-center gap-2 my-2">
-                            <input type="checkbox"  className="checkbox" />
-                             Event2
-                        </label>
-                        <label className="fieldset-label flex items-center gap-2 my-2">
-                            <input type="checkbox"  className="checkbox" />
-                             Event3
-                        </label>
-                        <label className="fieldset-label flex items-center gap-2 my-2">
-                            <input type="checkbox"  className="checkbox" />
-                             Event4
-                        </label> */}
 
                     </fieldset>
-
+                    <div className='flex justify-center '>
                     <button
                         type="submit"
-                        // onClick={notify}
-                        className="w-full font-bold  border-primary border text-xl text-primary  rounded-full p-3 hover:bg-primary hover:text-white transition"
+                        className="text-xs md:text-sm w-32 py-2 px-3 font-semibold mt-6 border-primary border text-base text-primary  rounded-full p-2 hover:bg-primary hover:text-white transition"
                     >
                         Register
                     </button>
+                    </div>
+                  
                     <ToastContainer />
                 </form>
             </div>
         </div>
     );
+}
 }
 
 export default Registration

@@ -9,7 +9,6 @@ const Navbar = () => {
   window.addEventListener('scroll', () => {
     if (window.scrollY > 550) {
       setSticky(true)
-      console.log("sticky"+sticky);
     } else {
       setSticky(false)
     }
