@@ -4,11 +4,27 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BASE_URL } from '../Utils/constants';
-import { useSelector } from 'react-redux';
 
 const Registration = () => {
     const navigate = useNavigate();
-    const isRegistrationClose = useSelector(state =>state.registration);
+    const [isRegistrationClose,setisRegistrationClose]=useState(null);
+
+    useEffect(()=>{
+        const GetRegistrationFormStatus = async () => {
+            try{
+                const res= await axios.get(`${BASE_URL}registration-status`, {
+                    withCredentials: true, // Ensures cookies are sent with the request
+                  });
+                  console.log(res.data.isRegistrationClosed)
+                  setisRegistrationClose(res.data.isRegistrationClosed)
+            }catch(err){
+                console.log("err :"+err);
+            }      
+        }
+        GetRegistrationFormStatus();
+
+    },[])
+
     const [formData, setFormData] = useState({
         Participant1_Name: "",
         Participant1_rollno: "",
@@ -18,6 +34,7 @@ const Registration = () => {
         phoneNo: "",
         events: []
     });
+
 
     let EventOption = ["Event1", "Event2", "Event3", "Event4"];
     let [EventChecked, setEventChecked] = useState([]);
@@ -39,8 +56,6 @@ const Registration = () => {
             }
         });
     };
-
-
 
     useEffect(() => {
         setFormData({ ...formData, events: EventChecked });
@@ -81,7 +96,7 @@ const Registration = () => {
     }
     console.log(isRegistrationClose); 
     {return isRegistrationClose?(
-        <div className='flex justify-center items-center h-96'>
+        <div className='flex justify-center items-center h-96  m-auto w-full md:w-5/6 p-5 '>
             <p className='font-semibold'>We're sorry, but registration is currently closed. Stay tuned for upcoming opportunities!</p>   
         </div>
          ):(
@@ -132,17 +147,6 @@ const Registration = () => {
                             className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
                             required />
                     </fieldset>
-
-                    {/* <fieldset className="fieldset">
-                        <legend className="fieldset-legend font-semibold mb-1">Select a Event</legend>
-                        <select defaultValue="Pick a browser" name="event" value={formData.event} onChange={handleChange} className="select  w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-200">
-                            <option disabled={true}>Select here</option>
-                            <option>Event 1</option>
-                            <option>Event 2</option>
-                            <option>Event 3</option>
-                            <option>Event 4</option>
-                        </select>
-                    </fieldset> */}
 
                     <fieldset className="fieldset p-2 bg-base-100 border border-primary rounded-lg w-full">
                         <legend className="fieldset-legend font-bold md:text-sm text-xs">Select Events</legend>

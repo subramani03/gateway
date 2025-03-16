@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Body from './Components/Body'
 import Home from './Components/Home'
@@ -9,14 +9,9 @@ import Registration from './Components/Registration'
 import Login from './Components/Login'
 import EventRule from './Components/EventRule'
 import ConfirmationBox from './Components/ConfirmationBox'
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react"; // Import PersistGate
-import AppStore, { persistor } from './Utils/AppStore'; // Import persistor
+
 const App = () => {
   return (
-
-    <Provider store={AppStore}>
-      <PersistGate loading={null} persistor={persistor}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Body />} >
@@ -31,9 +26,6 @@ const App = () => {
           </Route>
         </Routes>
       </BrowserRouter>
-      </PersistGate>
-    </Provider>
-
   )
 }
 export default App

@@ -19,6 +19,29 @@ const connectDB = async () => {
   await mongoose.connect("mongodb+srv://subramani420:BJht2uUTg5bzfXNx@gateway.ju3xi.mongodb.net/");
 };
 
+
+let isRegistrationClosed = false; // Global state in server
+
+// API to get the current registration status
+app.get('/registration-status', (req, res) => {
+  res.json({ isRegistrationClosed });
+})
+
+// API to update the registration status
+app.post('/registration-status', (req, res) => {
+  isRegistrationClosed = req.body.isClosed;
+  if(isRegistrationClosed){
+    res.json({ message: "Registration form closed!",
+      RegistrationFormClosed:true
+     });
+  }else{
+    res.json({ message: "Registration form opened",
+      RegistrationFormClosed:false
+     });
+  }
+});
+
+
 app.delete("/deteteRegistration",UserAuth,async(req,res)=>{
   try{
     await EventModel.deleteMany({});
