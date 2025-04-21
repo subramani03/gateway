@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import { Link ,useLocation, useNavigate} from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import gateway_logo from "../assets/gateway_logo.avif"
+import FormContext from '../Utils/FormContext';
 
 const Navbar = () => {
   const location = useLocation().pathname;
+  const {formData}=useContext(FormContext);
   const [sticky, setSticky] = useState(false);
   const navigate = useNavigate();
   window.addEventListener('scroll', () => {
@@ -14,16 +16,16 @@ const Navbar = () => {
     }
   });
   return (
-    <div className={`navbar ${location==='/'? 'text-white fixed' :'bg-zinc-950 shadow-lg'} ${sticky ?'bg-zinc-950 shadow-lg ':''} z-30`}>
-      <div className="flex-1 cursor-pointer" onClick={()=>{navigate('/')}}>
+    <div className={`navbar ${location === '/' ? 'text-white fixed' : 'bg-zinc-950 shadow-lg'} ${sticky ? 'bg-zinc-950 shadow-lg ' : ''} z-30`}>
+      <div className="flex-1 cursor-pointer" onClick={() => { navigate('/') }}>
         <div tabIndex={0} className="avatar mx-2">
           <div className="w-10 rounded-full">
             <img
               alt="Tailwind CSS Navbar component"
-              src={gateway_logo} />
+              src={formData?.logo} />
           </div>
         </div>
-        <a className="text-lg sm:text-xl md:text-2xl lg:text-2xl font-semibold ">Gateway '25</a>
+        <a className="text-lg sm:text-xl md:text-2xl lg:text-2xl font-semibold ">{formData?.name}</a>
       </div>
       <div className="flex-none">
         <div className="dropdown dropdown-end z-20">
@@ -33,18 +35,33 @@ const Navbar = () => {
           <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-zinc-950 rounded-box z-1 mt-3 w-52 p-2 shadow-md text-primary font-semibold">
-            <li>
-              <Link to={'/'} >Home</Link>
-            </li>
-            <li>
-              <Link to={'/event'} >Events</Link>
-            </li>
-            <li>
-              <Link to={'/about'} >About</Link>
-            </li>
-            <li>
-              <a href="https://heyzine.com/flip-book/81d488f5af.html" target="_blank">Magazines</a>
-            </li>
+            {
+              /^\/admin.*/.test(location) ? (
+                <>
+                  <li>
+                    <Link to={'/admin'} >Registration Details</Link>
+                  </li>
+                  <li>
+                    <Link to={'/admin/SymposiumDetails'} >Edit Event Details</Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link to={'/'} >Home</Link>
+                  </li>
+                  <li>
+                    <Link to={'/event'} >Events</Link>
+                  </li>
+                  <li>
+                    <Link to={'/about'} >About</Link>
+                  </li>
+                  <li>
+                    <a href="https://heyzine.com/flip-book/81d488f5af.html" target="_blank">Magazines</a>
+                  </li>
+                </>
+              )
+            }
           </ul>
         </div>
       </div>

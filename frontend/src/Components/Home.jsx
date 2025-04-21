@@ -1,12 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import clg_logo from '../assets/clg_logo.avif';
 import clg_iso_certified_img from '../assets/clg_iso_certified_img.avif';
 import bgvideo from '../assets/021794daa81f80dbf49fc06af2091714 (1).mp4';
-import gateway_logo from '../assets/gateway_logo.png';
+// import gateway_logo from '../assets/gateway_logo.png';
 import eventData from '../assets/events.json';
+import FormContext from '../Utils/FormContext';
 
 const Home = () => {
+    const {formData}= useContext(FormContext);
   const videoRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -18,7 +20,7 @@ const Home = () => {
 
 
 
-  const eventDate = new Date("2025-04-01T00:00:00");
+  const eventDate = new Date(formData?.Date);
   const CalculateTimeLeft = () => {
     const difference = eventDate - new Date();
     if (difference <= 0) {
@@ -97,17 +99,17 @@ const Home = () => {
           </div> */}
 
           <h3 className="text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold mt-5 mb-3 text-primary">
-            DEPARTMENT OF COMPUTATIONAL SCIENCES
+          {formData?.organizers}
           </h3>
-          <h6 className="text-xs md:text-sm font-mono">(CS, MCA, BCA, IT, SS, CT, NMA, DA)</h6>
+          <h6 className="text-xs md:text-sm font-mono"> {formData?.organizers_description}</h6>
           <h4 className="text-lg font-semibold">Organizes</h4>
           <p className="text-xs sm:text-lg md:text-xl font-semibold">
-            A NATIONAL LEVEL INTER COLLEGIATE TECHNICAL SYMPOSIUM
+            {formData?.description}
           </p>
 
           <div className="flex items-center justify-center mt-5 sm:mt-2">
-            <img src={gateway_logo} alt="Gateway Logo" className="w-20 md:w-28" />
-            <p className='text-3xl sm:text-4xl md:text-5xl my-4 text-primary text-center font-serif ' style={{ textShadow: "1px 1px 4px #00fff5" }}><b>GATEWAY '25 </b></p>
+            <img src={formData?.logo} alt="Gateway Logo" className="w-20 md:w-28" />
+            <p className='text-3xl sm:text-4xl md:text-5xl my-4 text-primary text-center font-serif ' style={{ textShadow: "1px 1px 4px #00fff5" }}><b>{formData?.name.toUpperCase()}</b></p>
           </div>
 
           <button className=" text-primary border border-primary font-bold px-6 py-2 rounded-full mt-5">
@@ -156,9 +158,9 @@ const Home = () => {
               className="flex transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
-              {eventData.events.map((event, index) => (
+              {formData?.events.map((event, index) => (
                 <div key={index} className="w-96 flex-shrink-0">
-                  <Link to={`/event/${event.id - 1}`}>
+                  <Link to={`/event/${event?._id}`}>
                     <img src={event.imgUrl} alt={event.name} className="w-full h-5/6 object-center  rounded-lg" />
                     <p className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-1 rounded-md text-lg font-semibold">
                       {event.name}

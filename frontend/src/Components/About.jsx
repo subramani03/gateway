@@ -9,9 +9,7 @@ const About = () => {
         <p className='font-semibold mb-2 text-center text-primary'>The School of Computational Sciences proudly presents</p>
         <p className='text-lg sm:text-xl md:text-2xl lg:text-4xl m-4 text-primary text-center font-serif ' style={{ textShadow: "1px 1px 4px #00fff5" }}><b>GATEWAY '25 </b></p>
         <p className='mb-2'> One Day National Level Inter Collegiate Technical Symposiums is scheduled on <b>12th March, 2025 </b>. We cordially invite you all for the same and motivate your students to actively participate in this mega event. </p>
-
         <p className='mb-2'>Enroll now & showcase your skills in exciting Technical events and Grab the attractive cash prizes</p>
-
         <ul className='font-semibold my-5 px-4'>
           <li className='flex items-center gap-2'><i className="fa-solid fa-calendar-days text-primary"></i>  : 12th March, 2025</li>
           <li className='flex items-center gap-1 mt-1'><i className="fa-solid fa-clock text-primary "></i> : 9:00 AM onwards</li>

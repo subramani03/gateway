@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import eventData from '../assets/events.json'
 import { Link } from 'react-router-dom'
+import FormContext from '../Utils/FormContext'
 const Event = () => {
 
-  console.log(eventData.events[0].rules);
+  const {formData}= useContext(FormContext);
+  console.log(formData?.events);
   return (
     <>
 
@@ -14,9 +16,9 @@ const Event = () => {
 
 
       <div className='flex justify-around items-center gap-5 flex-wrap w-full m-auto  md:w-5/6 lg:w-4/6 p-5'>
-        {eventData.events.map((event, index) => (
+        {formData?.events.map((event, index) => (
           <div key={index} className="">
-            <Link to={`/event/${index}`}>
+            <Link to={`/event/${event._id}`}>
               <div key={index} className="card bg-zinc-950 w-72 h-80  md:w-64 lg:w-72 shadow-md shadow-primary mt-3">
                 <figure>
                   <img className='w-full h-60' src={event.imgUrl} alt="" />

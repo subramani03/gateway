@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { BASE_URL } from '../Utils/constants';
+import { BASE_URL } from '../../Utils/constants';
 
 const ConfirmationBox = ({setFilterRegistrationDetails,setRegistrationDetails,setShowConfirmation}) => {
     const deleteRecords = async () => {
