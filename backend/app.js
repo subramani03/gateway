@@ -3,10 +3,13 @@ const mongoose = require("mongoose");
 const { ObjectId } = require("mongodb");
 const EventModel = require("./EventModel");
 const symposiumModel = require("./symposiumModel");
+const cloudinary = require('./Config/cloudinary');
 const cookieParser = require("cookie-parser");
 const app = express();
 var cors = require("cors");
 require("dotenv").config();
+const fileUpload = require('express-fileupload');
+const { Readable } = require('stream');
 const { UserAuth } = require("./middleware/auth");
 const multer = require("multer");
 const path = require("path");
@@ -14,6 +17,7 @@ const path = require("path");
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(fileUpload()); // Middleware for parsing form-data
 
 const { BASE_URL,FRONTEND_BASE_URL } = require("./Utils/constants.js");
 
@@ -183,30 +187,69 @@ app.get("/checkAuth", (req, res) => {
 
 //! Images Routes
 //Image storage engine
-const storage = multer.diskStorage({
-  destination: "./upload/images",
-  filename: (req, file, cb) => {
-    return cb(
-      null,
-      `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
-    );
-  },
+// const storage = multer.diskStorage({
+//   destination: "./upload/images",
+//   filename: (req, file, cb) => {
+//     return cb(
+//       null,
+//       `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
+//     );
+//   },
+// });
+
+// const upload = multer({
+//   storage: storage,
+// });
+// //'event_logo' --> fieldname
+
+// app.use("/images", express.static("upload/images"));
+// // creating upload Endpoint for images
+
+// app.post("/upload", upload.single("eventLogo"), (req, res) => {
+//   res.json({
+//     success: 1,
+//     image_url: `${BASE_URL}images/${req?.file.filename}`,
+//   });
+// });
+
+
+
+
+
+app.post('/upload', async (req, res) => {
+  try {
+    const file = req.files?.eventLogo;
+
+    if (!file) {
+      return res.status(400).json({ success: 0, message: 'No file uploaded' });
+    }
+
+    const result = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder: 'eventImages',
+          resource_type: 'image',
+        },
+        (error, result) => {
+          if (error) return reject(error);
+          resolve(result);
+        }
+      );
+
+      // ✅ Convert buffer to stream and pipe to Cloudinary
+      Readable.from(file.data).pipe(uploadStream);
+    });
+
+    return res.json({ success: 1, image_url: result.secure_url });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: 0, error: error.message });
+  }
 });
 
-const upload = multer({
-  storage: storage,
-});
-//'event_logo' --> fieldname
 
-app.use("/images", express.static("upload/images"));
-// creating upload Endpoint for images
 
-app.post("/upload", upload.single("eventLogo"), (req, res) => {
-  res.json({
-    success: 1,
-    image_url: `${BASE_URL}images/${req?.file.filename}`,
-  });
-});
+
 
 app.put("/updateEventDetails", async (req, res) => {
   try {
