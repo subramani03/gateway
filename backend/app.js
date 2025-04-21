@@ -10,18 +10,24 @@ require("dotenv").config();
 const { UserAuth } = require("./middleware/auth");
 const multer = require("multer");
 const path = require("path");
-const { BASE_URL } = require("./Utils/constants.js");
+
+
 app.use(cookieParser());
 app.use(express.json());
 
+const { BASE_URL,FRONTEND_BASE_URL } = require("./Utils/constants.js");
+
 app.use(
   cors({
-    origin: "http://localhost:5173",                          // Make sure this matches the frontend origin exactly
+    origin:FRONTEND_BASE_URL,                          // Make sure this matches the frontend origin exactly
     methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],      // Ensure PATCH is included
     allowedHeaders: ["Content-Type", "Authorization"],      // Allow these headers
     credentials: true, // Allow cookies and credentials
   })
 );
+
+
+console.log(FRONTEND_BASE_URL)
 
 const connectDB = async () => {
   await mongoose.connect(
@@ -154,7 +160,12 @@ app.post("/adminLogin", async (req, res) => {
     res.cookie(
       "token",
       process.env.ADMIN_USERNAME + "!@#123" + process.env.ADMIN_PASSWORD,
-      { expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) }
+      { 
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',      // true only in production
+        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) 
+      }
     );
     res.send("authenticated");
   } else {
