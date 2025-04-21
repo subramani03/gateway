@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",                          // Make sure this matches the frontend origin exactly
+    origin: "https://gateway-6epe.onrender.com/",                          // Make sure this matches the frontend origin exactly
     methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],      // Ensure PATCH is included
     allowedHeaders: ["Content-Type", "Authorization"],      // Allow these headers
     credentials: true, // Allow cookies and credentials
