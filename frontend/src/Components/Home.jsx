@@ -8,7 +8,7 @@ import eventData from '../assets/events.json';
 import FormContext from '../Utils/FormContext';
 
 const Home = () => {
-    const {formData}= useContext(FormContext);
+  const { formData } = useContext(FormContext);
   const videoRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -36,18 +36,18 @@ const Home = () => {
       day: Math.floor(difference / (1000 * 60 * 60 * 24)),
       hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
       minutes: Math.floor((difference / (1000 * 60)) % 60),
-      seconds: Math.floor((difference /1000) % 60)
+      seconds: Math.floor((difference / 1000) % 60)
     }
   }
-  const [timeCounter,settimeCounter] = useState(CalculateTimeLeft());
+  const [timeCounter, settimeCounter] = useState(CalculateTimeLeft());
 
   useEffect(() => {
     const timer = setInterval(() => {
-      settimeCounter(CalculateTimeLeft());   
+      settimeCounter(CalculateTimeLeft());
     }, 1000);
 
-    return ()=>clearInterval(timer);
-    
+    return () => clearInterval(timer);
+
   }, [timeCounter])
 
   const prevSlide = () => {
@@ -58,7 +58,13 @@ const Home = () => {
     setCurrentIndex((prev) => (prev === eventData.events.length - 1 ? 0 : prev + 1));
   };
 
-
+  if (!formData) {
+    return (
+      <div className="flex justify-center items-center h-96">
+        <div className="h-10 w-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -99,7 +105,7 @@ const Home = () => {
           </div> */}
 
           <h3 className="text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold mt-5 mb-3 text-primary">
-          {formData?.organizers}
+            {formData?.organizers}
           </h3>
           <h6 className="text-xs md:text-sm font-mono"> {formData?.organizers_description}</h6>
           <h4 className="text-lg font-semibold">Organizes</h4>
@@ -145,10 +151,10 @@ const Home = () => {
 
       {/* Events Carousel Section */}
       <div className="m-auto w-full md:w-5/6 lg:w-4/6 p-10">
-      <div className='flex flex-col items-start'>
-        <h2 className='text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold mt-8'>Events</h2>
-        <div className="mx-2 w-10 h-1 text-center bg-primary"></div>
-      </div>
+        <div className='flex flex-col items-start'>
+          <h2 className='text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold mt-8'>Events</h2>
+          <div className="mx-2 w-10 h-1 text-center bg-primary"></div>
+        </div>
 
         {/* Carousel Container */}
         <div className="relative flex flex-col items-center mt-10">

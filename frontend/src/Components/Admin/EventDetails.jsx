@@ -26,29 +26,55 @@ const EventDetails = () => {
         setImagePreviews((prev) => [...prev, '']);
     };
 
-    const createImageUrl = async (file) => {
+    // const createImageUrl = async (file) => {
+    //     let formdata = new FormData();
+    //     formdata.append('eventLogo', file);
+    //     try {
+    //         let response = await axios.post(`${BASE_URL}upload`, formdata, {
+    //             headers: {
+    //                 'Content-Type': 'multipart/form-data',
+    //             },
+    //             withCredentials: true,
+    //         });
+
+    //         if (response.data.success) {
+    //             return response.data.image_url;
+    //         } else {
+    //             console.error('Upload failed', response.data);
+    //             return '';
+    //         }
+    //     } catch (err) {
+    //         console.error('Error uploading image', err);
+    //         return '';
+    //     }
+    // };
+
+
+      const createImageUrl = async (file) => {
         let formdata = new FormData();
-        formdata.append('eventLogo', file);
+        formdata.append('media', file);
         try {
-            let response = await axios.post(`${BASE_URL}upload`, formdata, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-                withCredentials: true,
-            });
-
-            if (response.data.success) {
-                return response.data.image_url;
-            } else {
-                console.error('Upload failed', response.data);
-                return '';
-            }
-        } catch (err) {
-            console.error('Error uploading image', err);
+          let response = await axios.post(`${BASE_URL}upload-media`, formdata, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+            withCredentials: true,
+          });
+    
+          if (response.data.success) {
+            return response.data.image_url;
+          } else {
+            console.error('Upload failed', response.data);
             return '';
+          }
+        } catch (err) {
+          console.error('Error uploading image', err);
+          return '';
         }
-    };
+      };
 
+
+      
     const handleImageChange = async (e, index) => {
         const file = e.target.files[0];
         if (!file) return;

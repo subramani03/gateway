@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react';
 import upload_area from '../../assets/upload_area_dark.png';
 import axios from 'axios';
 import { BASE_URL } from '../../Utils/constants';
@@ -6,23 +6,15 @@ import FormContext from '../../Utils/FormContext';
 import { Link } from 'react-router-dom';
 
 const SymposiumDetails = () => {
-  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [videoPreview, setVideoPreview] = useState(null);
   const { formData, setFormData } = useContext(FormContext);
 
-  console.log(formData);
-
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     setImage(file);
-  //   }
-  // }
-
-  const createImageUrl = async (file) => {
-    let formdata = new FormData();
-    formdata.append('eventLogo', file);
+  const createMediaUrl = async (file) => {
+    const formdata = new FormData();
+    formdata.append('media', file);
     try {
-      let response = await axios.post(`${BASE_URL}upload`, formdata, {
+      const response = await axios.post(`${BASE_URL}upload-media`, formdata, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -36,11 +28,10 @@ const SymposiumDetails = () => {
         return '';
       }
     } catch (err) {
-      console.error('Error uploading image', err);
+      console.error('Error uploading media', err);
       return '';
     }
   };
-
 
   const handleChange = (e, path) => {
     const keys = path.split('.');
@@ -56,25 +47,22 @@ const SymposiumDetails = () => {
       }
 
       target[keys[keys.length - 1]] = value;
-      console.log(updated);
       return updated;
     });
   };
 
-
   return (
-
     <div className="flex items-center justify-center min-h-screen p-4 mt-10">
       <div className="bg-zinc-950 p-8 rounded-lg shadow-xl w-full max-w-md">
         <h3 className='text-sm sm:text-base md:text-xl text-primary font-bold text-center mb-3'>Main Event Details</h3>
-        <form onSubmit={(e) => { e.preventDefault() }} className="p-4 space-y-4">
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Event Name</legend>
-            <input type="text" placeholder="Name"
-              value={formData?.name}
-              className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-              onChange={(e) => handleChange(e, 'name')} required />
+        <form onSubmit={(e) => { e.preventDefault(); }} className="p-4 space-y-4">
+          {/* Basic fields */}
+          <fieldset>
+            <legend className="font-semibold mb-1 md:text-sm text-xs">Event Name</legend>
+            <input type="text" value={formData?.name} onChange={(e) => handleChange(e, 'name')}
+              className="input w-full p-3 border border-primary rounded-lg text-sm" required />
           </fieldset>
+
           <fieldset className="fieldset">
             <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Event Description</legend>
             <textarea type="text" placeholder="Description" value={formData?.description}
@@ -104,18 +92,19 @@ const SymposiumDetails = () => {
               onChange={(e) => handleChange(e, 'organizers_description')} />
           </fieldset>
 
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Date</legend>
-            <input type="date" placeholder="Organizers Description" value={formData?.Date.split('T')[0]}
-              className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-              onChange={(e) => handleChange(e, 'Date')} />
+
+          <fieldset>
+            <legend className="font-semibold mb-1 md:text-sm text-xs">Date</legend>
+            <input type="date" value={formData?.Date?.split('T')[0]} onChange={(e) => handleChange(e, 'Date')}
+              className="input w-full p-3 border border-primary rounded-lg text-sm" />
           </fieldset>
 
-          <fieldset className="fieldset my-2">
-            <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs">Event logo</legend>
-            <label htmlFor={`file-input`}>
+          {/* Event Logo Upload */}
+          <fieldset>
+            <legend className="font-semibold mb-1 md:text-sm text-xs">Event Logo</legend>
+            <label htmlFor="file-input-image">
               <img
-                src={formData?.logo ? formData?.logo : image ? URL.createObjectURL(image) : upload_area}
+                src={formData?.logo || imagePreview || upload_area}
                 className="w-28 h-28 m-5 object-cover rounded-lg cursor-pointer"
                 alt="Upload"
               />
@@ -123,184 +112,166 @@ const SymposiumDetails = () => {
             <input
               type="file"
               hidden
-              id={`file-input`}
+              id="file-input-image"
+              accept="image/*"
               onChange={async (e) => {
                 const file = e.target.files[0];
-                setImage(file);
-                const urls = await createImageUrl(file);
-                console.log(urls);
-                const updated = { ...formData };
-                updated.logo = urls;
-                setFormData(updated);
-              }} />
-
+                if (!file) return;
+                setImagePreview(URL.createObjectURL(file));
+                const url = await createMediaUrl(file);
+                setFormData(prev => ({ ...prev, logo: url }));
+              }}
+            />
           </fieldset>
 
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Backgroud video</legend>
-            <input type="text" placeholder="Background Video URL" value={formData?.back_groud_video}
-              className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-              onChange={(e) => handleChange(e, 'back_groud_video')} />
+          {/* Background Video Upload */}
+          <fieldset>
+            <legend className="font-semibold mb-1 md:text-sm text-xs">Home Background Video</legend>
+            <label htmlFor="file-input-video">
+              <div className="relative w-28 h-28 m-5 rounded-lg overflow-hidden cursor-pointer border">
+                {formData?.back_groud_video || videoPreview ? (
+                  <video
+                    src={formData?.back_groud_video || videoPreview}
+                    className="w-full h-full object-cover pointer-events-none"
+                    muted
+                    autoPlay
+                    loop
+                  />
+                ) : (
+                  <img
+                    src={upload_area}
+                    className="w-full h-full object-cover"
+                    alt="Upload"
+                  />
+                )}
+                <div className="absolute inset-0 bg-black/40 text-white flex items-center justify-center text-xs opacity-0 hover:opacity-100 transition">
+                  Click to change video
+                </div>
+              </div>
+            </label>
+            <input
+              type="file"
+              hidden
+              id="file-input-video"
+              accept="video/*"
+              onChange={async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                setVideoPreview(URL.createObjectURL(file));
+                const url = await createMediaUrl(file);
+                setFormData(prev => ({ ...prev, back_groud_video: url }));
+              }}
+            />
           </fieldset>
 
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Location</legend>
-            <input type="text" placeholder="location" value={formData?.location}
-              className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-              onChange={(e) => handleChange(e, 'location')} />
+          {/* Location, Fees, Team size */}
+          <fieldset>
+            <legend className="font-semibold mb-1 md:text-sm text-xs">Location</legend>
+            <input type="text" value={formData?.location} onChange={(e) => handleChange(e, 'location')}
+              className="input w-full p-3 border border-primary rounded-lg text-sm" />
           </fieldset>
 
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Registration Fees</legend>
-            <input type="number" placeholder="Registration Fees" value={formData?.RegistrationFees}
-              className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-              onChange={(e) => handleChange(e, 'RegistrationFees')} />
+          <fieldset>
+            <legend className="font-semibold mb-1 md:text-sm text-xs">Registration Fees</legend>
+            <input type="number" value={formData?.RegistrationFees} onChange={(e) => handleChange(e, 'RegistrationFees')}
+              className="input w-full p-3 border border-primary rounded-lg text-sm" />
           </fieldset>
 
-
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Maximum members per team</legend>
-            <input type="number" placeholder="Per team size" value={formData?.perTeamSize}
-              className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-              onChange={(e) => handleChange(e, 'perTeamSize')} />
+          <fieldset>
+            <legend className="font-semibold mb-1 md:text-sm text-xs">Maximum members per team</legend>
+            <input type="number" value={formData?.perTeamSize} onChange={(e) => handleChange(e, 'perTeamSize')}
+              className="input w-full p-3 border border-primary rounded-lg text-sm" />
           </fieldset>
-          {/* Contacts  */}
-          <h1 className='font-bold '>Contact Details</h1>
+
+          {/* Contact Details */}
+          <h1 className='font-bold'>Contact Details</h1>
 
           {/* Registration Contacts */}
-
-          <div>
-            <h3 className='font-semibold text-primary'>For Registration</h3>
-            <div className='flex gap-2 mb-2'>
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Name</legend>
-                <input type="text" placeholder="Registration Contact Name"
-                  className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-                  value={formData?.contact?.forRegistrationDetails[0]?.name} onChange={(e) => {
+          <h3 className='font-semibold text-primary'>For Registration</h3>
+          {[0, 1].map(i => (
+            <div className='flex gap-2 mb-2' key={i}>
+              <fieldset>
+                <legend className="font-semibold mb-1 md:text-sm text-xs">Name</legend>
+                <input type="text"
+                  value={formData?.contact?.forRegistrationDetails[i]?.name || ''}
+                  onChange={(e) => {
                     const updated = { ...formData };
-                    updated.contact.forRegistrationDetails[0].name = e.target.value;
+                    updated.contact.forRegistrationDetails[i].name = e.target.value;
                     setFormData(updated);
-                  }} />
+                  }}
+                  className="input w-full p-3 border border-primary rounded-lg text-sm"
+                />
               </fieldset>
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Phone</legend>
-                <input type="text" placeholder="Registration Phone"
-                  className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-                  value={formData?.contact?.forRegistrationDetails[0]?.ph_no} onChange={(e) => {
+              <fieldset>
+                <legend className="font-semibold mb-1 md:text-sm text-xs">Phone</legend>
+                <input type="text"
+                  value={formData?.contact?.forRegistrationDetails[i]?.ph_no || ''}
+                  onChange={(e) => {
                     const updated = { ...formData };
-                    updated.contact.forRegistrationDetails[0].ph_no = e.target.value;
+                    updated.contact.forRegistrationDetails[i].ph_no = e.target.value;
                     setFormData(updated);
-                  }} />
-              </fieldset>
-            </div>
-            <div className='flex gap-2 mb-2'>
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Name</legend>
-                <input type="text" placeholder="Registration Contact Name"
-                  className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-                  value={formData?.contact?.forRegistrationDetails[1]?.name} onChange={(e) => {
-                    const updated = { ...formData };
-                    updated.contact.forRegistrationDetails[1].name = e.target.value;
-                    setFormData(updated);
-                  }} />
-              </fieldset>
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Phone</legend>
-                <input type="text" placeholder="Registration Phone"
-                  className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-                  value={formData?.contact?.forRegistrationDetails[1]?.ph_no} onChange={(e) => {
-                    const updated = { ...formData };
-                    updated.contact.forRegistrationDetails[1].ph_no = e.target.value;
-                    setFormData(updated);
-                  }} />
+                  }}
+                  className="input w-full p-3 border border-primary rounded-lg text-sm"
+                />
               </fieldset>
             </div>
-          </div>
+          ))}
 
-          {/*Contact Event Details */}
-
-          <div>
-            <h3 className='font-semibold text-primary'>For Event</h3>
-
-            <div className='flex gap-2 mb-2'>
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Name</legend>
-                <input type="text" placeholder="Registration Contact Name"
-                  className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-                  value={formData?.contact?.forEventDetails[0]?.name} onChange={(e) => {
+          {/* Event Contacts */}
+          <h3 className='font-semibold text-primary'>For Event</h3>
+          {[0, 1].map(i => (
+            <div className='flex gap-2 mb-2' key={i}>
+              <fieldset>
+                <legend className="font-semibold mb-1 md:text-sm text-xs">Name</legend>
+                <input type="text"
+                  value={formData?.contact?.forEventDetails[i]?.name || ''}
+                  onChange={(e) => {
                     const updated = { ...formData };
-                    updated.contact.forEventDetails[0].name = e.target.value;
+                    updated.contact.forEventDetails[i].name = e.target.value;
                     setFormData(updated);
-                  }} />
+                  }}
+                  className="input w-full p-3 border border-primary rounded-lg text-sm"
+                />
               </fieldset>
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Contact</legend>
-                <input type="text" placeholder="Registration Phone"
-                  className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-                  value={formData?.contact?.forEventDetails[0]?.ph_no} onChange={(e) => {
+              <fieldset>
+                <legend className="font-semibold mb-1 md:text-sm text-xs">Phone</legend>
+                <input type="text"
+                  value={formData?.contact?.forEventDetails[i]?.ph_no || ''}
+                  onChange={(e) => {
                     const updated = { ...formData };
-                    updated.contact.forEventDetails[0].ph_no = e.target.value;
+                    updated.contact.forEventDetails[i].ph_no = e.target.value;
                     setFormData(updated);
-                  }} />
-              </fieldset>
-            </div>
-
-            <div className='flex gap-2 mb-2'>
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Name</legend>
-                <input type="text" placeholder="Registration Contact Name"
-                  className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-                  value={formData?.contact?.forEventDetails[1]?.name} onChange={(e) => {
-                    const updated = { ...formData };
-                    updated.contact.forEventDetails[1].name = e.target.value;
-                    setFormData(updated);
-                  }} />
-              </fieldset>
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">Contact</legend>
-                <input type="text" placeholder="Registration Phone"
-                  className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-                  value={formData?.contact?.forEventDetails[1]?.ph_no} onChange={(e) => {
-                    const updated = { ...formData };
-                    updated.contact.forEventDetails[1].ph_no = e.target.value;
-                    setFormData(updated);
-                  }} />
+                  }}
+                  className="input w-full p-3 border border-primary rounded-lg text-sm"
+                />
               </fieldset>
             </div>
-          </div>
-          {/* Social media */}
+          ))}
 
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">instagram</legend>
-            <input type="text" placeholder="Instagram" value={formData?.social_media?.instagram}
-              className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-              onChange={(e) => handleChange(e, 'social_media.instagram')} />
+          {/* Social Media */}
+          <fieldset>
+            <legend className="font-semibold mb-1 md:text-sm text-xs">Instagram</legend>
+            <input type="text" value={formData?.social_media?.instagram || ''} onChange={(e) => handleChange(e, 'social_media.instagram')}
+              className="input w-full p-3 border border-primary rounded-lg text-sm" />
           </fieldset>
 
-          <fieldset className="fieldset">
-            <legend className="fieldset-legend font-semibold mb-1 md:text-sm text-xs ">mail</legend>
-            <input type="email" placeholder="Mail" value={formData?.social_media?.mail}
-              className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
-              onChange={(e) => handleChange(e, 'social_media.mail')} />
+          <fieldset>
+            <legend className="font-semibold mb-1 md:text-sm text-xs">Mail</legend>
+            <input type="email" value={formData?.social_media?.mail || ''} onChange={(e) => handleChange(e, 'social_media.mail')}
+              className="input w-full p-3 border border-primary rounded-lg text-sm" />
           </fieldset>
 
-
-
-          <div className='flex justify-center'>
+          {/* Navigation */}
+          <div className="flex justify-center">
             <button className="text-xs md:text-sm w-32 py-2 px-3 font-semibold mt-6 border-primary border text-primary  rounded-full p-2 hover:bg-primary hover:text-white transition"
-              onClick={() => { console.log(formData) }}
-            ><Link to={'/admin/EventDetails'}>Next</Link></button>
+              onClick={() => console.log(formData)}>
+              <Link to="/admin/EventDetails">Next</Link>
+            </button>
           </div>
         </form>
       </div>
     </div>
   );
-
-  // return (
-
-  // <button onClick={setProductData}>Add</button>
-  //   </div >
-  // )
-}
+};
 
 export default SymposiumDetails;

@@ -156,6 +156,14 @@ const Admin = ({ isAuthenticated }) => {
     return <p>Checking authentication...</p>;
   }
 
+  if (!formData) {
+    return (
+      <div className="flex justify-center items-center h-96">
+        <div className="h-10 w-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    )
+  }
+
   if (!isAuthenticated) {
     return null;
   }

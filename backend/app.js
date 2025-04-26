@@ -216,19 +216,56 @@ app.get("/checkAuth", (req, res) => {
 
 
 
-app.post('/upload', async (req, res) => {
+// app.post('/upload', async (req, res) => {
+//   try {
+//     const file = req.files?.eventLogo;
+
+//     if (!file) {
+//       return res.status(400).json({ success: 0, message: 'No file uploaded' });
+//     }
+
+//     const result = await new Promise((resolve, reject) => {
+//       const uploadStream = cloudinary.uploader.upload_stream(
+//         {
+//           folder: 'eventImages',
+//           resource_type: 'image',
+//         },
+//         (error, result) => {
+//           if (error) return reject(error);
+//           resolve(result);
+//         }
+//       );
+
+//       // ✅ Convert buffer to stream and pipe to Cloudinary
+//       Readable.from(file.data).pipe(uploadStream);
+//     });
+
+//     return res.json({ success: 1, image_url: result.secure_url });
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ success: 0, error: error.message });
+//   }
+// });
+
+
+app.post('/upload-media', async (req, res) => {
   try {
-    const file = req.files?.eventLogo;
+    const file = req.files?.media; // fieldname: 'media'
 
     if (!file) {
       return res.status(400).json({ success: 0, message: 'No file uploaded' });
     }
 
+    // Detect type from mimetype
+    const mimeType = file.mimetype; // e.g., 'image/png' or 'video/mp4'
+    const isVideo = mimeType.startsWith('video/');
+    const resourceType = isVideo ? 'video' : 'image';
+
     const result = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
-          folder: 'eventImages',
-          resource_type: 'image',
+          folder: isVideo ? 'eventVideos' : 'eventImages',
+          resource_type: resourceType,
         },
         (error, result) => {
           if (error) return reject(error);
@@ -236,19 +273,19 @@ app.post('/upload', async (req, res) => {
         }
       );
 
-      // ✅ Convert buffer to stream and pipe to Cloudinary
       Readable.from(file.data).pipe(uploadStream);
     });
 
-    return res.json({ success: 1, image_url: result.secure_url });
+    return res.json({
+      success: 1,
+      image_url: result.secure_url,
+      type: resourceType,
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ success: 0, error: error.message });
   }
 });
-
-
-
 
 
 app.put("/updateEventDetails", async (req, res) => {
