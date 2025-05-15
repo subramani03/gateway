@@ -3,35 +3,33 @@ const mongoose = require("mongoose");
 const { ObjectId } = require("mongodb");
 const EventModel = require("./EventModel");
 const symposiumModel = require("./symposiumModel");
-const cloudinary = require('./Config/cloudinary');
+const cloudinary = require("./Config/cloudinary");
 const cookieParser = require("cookie-parser");
 const app = express();
 var cors = require("cors");
 require("dotenv").config();
-const fileUpload = require('express-fileupload');
-const { Readable } = require('stream');
+const fileUpload = require("express-fileupload");
+const { Readable } = require("stream");
 const { UserAuth } = require("./middleware/auth");
 const multer = require("multer");
 const path = require("path");
-
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(fileUpload()); // Middleware for parsing form-data
 
-const { BASE_URL,FRONTEND_BASE_URL } = require("./Utils/constants.js");
+const { BASE_URL, FRONTEND_BASE_URL } = require("./Utils/constants.js");
 
 app.use(
   cors({
-    origin:FRONTEND_BASE_URL,                          // Make sure this matches the frontend origin exactly
-    methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],      // Ensure PATCH is included
-    allowedHeaders: ["Content-Type", "Authorization"],      // Allow these headers
+    origin: FRONTEND_BASE_URL, // Make sure this matches the frontend origin exactly
+    methods: ["GET", "POST", "PATCH", "DELETE", "PUT"], // Ensure PATCH is included
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow these headers
     credentials: true, // Allow cookies and credentials
   })
 );
 
-
-console.log(FRONTEND_BASE_URL)
+console.log(FRONTEND_BASE_URL);
 
 const connectDB = async () => {
   await mongoose.connect(
@@ -72,15 +70,27 @@ app.delete("/deteteRegistration", UserAuth, async (req, res) => {
   }
 });
 
+app.delete("/deteteOneRegistration/:id", UserAuth, async (req, res) => {
+  try {
+    let {id}=req.params;
+    console.log(id);
+    const result = await EventModel.deleteOne({_id:id})
+
+    if(result.deletedCount === 0){
+      res.send("no records matched to delete");
+    }
+    res.send("Deleted Succesfully");
+    console.log(result +"Deleted");
+  } catch (err) {
+    res.status(400).send("Error in deleting the registration details :" + err);
+  }
+});
+
+
 app.post("/register", async (req, res) => {
   try {
     console.log(req.body.formDatas);
-    const {
-      Participants,
-      college,
-      phoneNo,
-      events,
-    } = req?.body?.formDatas;
+    const { Participants, college, phoneNo, events } = req?.body?.formDatas;
 
     console.log(req.body.formData);
     console.log("events length:" + events.length);
@@ -88,17 +98,19 @@ app.post("/register", async (req, res) => {
     if (!events || !Array.isArray(events) || events.length === 0) {
       return res.status(400).send("Events must be a non-empty array");
     }
-    
-    if (!Participants || !Array.isArray(Participants) || Participants.length === 0) {
+
+    if (
+      !Participants ||
+      !Array.isArray(Participants) ||
+      Participants.length === 0
+    ) {
       return res.status(400).send("Events must be a non-empty array");
     }
 
-    let rollnos = Participants.map((participant)=>participant.roll_no); 
+    let rollnos = Participants.map((participant) => participant.roll_no);
     let count = await EventModel.countDocuments({
       college,
-      $or: [
-        { Participant_Rollnos: { $in: rollnos } }
-      ],
+      $or: [{ Participant_Rollnos: { $in: rollnos } }],
     });
     count += events.length;
     console.log("count " + count);
@@ -112,10 +124,7 @@ app.post("/register", async (req, res) => {
     let findAlreadyRegisterForEvents = await EventModel.find({
       college,
       events: { $in: events },
-      $or: [
-        { Participant_Rollnos: { $in: rollnos } }
-        
-      ],
+      $or: [{ Participant_Rollnos: { $in: rollnos } }],
     });
     if (findAlreadyRegisterForEvents.length > 0) {
       console.log("Cannot register. You have already register for this event");
@@ -127,7 +136,7 @@ app.post("/register", async (req, res) => {
     const documents = events.map((events) => {
       return {
         Participants,
-        Participant_Rollnos:rollnos,
+        Participant_Rollnos: rollnos,
         college,
         phoneNo,
         events,
@@ -164,11 +173,11 @@ app.post("/adminLogin", async (req, res) => {
     res.cookie(
       "token",
       process.env.ADMIN_USERNAME + "!@#123" + process.env.ADMIN_PASSWORD,
-      { 
+      {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',      // true only in production
-        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) 
+        secure: process.env.NODE_ENV === "production", // true only in production
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       }
     );
     res.send("authenticated");
@@ -176,6 +185,7 @@ app.post("/adminLogin", async (req, res) => {
     res.status(400).send("Invalid credentials");
   }
 });
+
 
 app.get("/checkAuth", (req, res) => {
   const token = req.cookies.token; // Retrieve the token from the cookies
@@ -212,10 +222,6 @@ app.get("/checkAuth", (req, res) => {
 //   });
 // });
 
-
-
-
-
 // app.post('/upload', async (req, res) => {
 //   try {
 //     const file = req.files?.eventLogo;
@@ -247,24 +253,26 @@ app.get("/checkAuth", (req, res) => {
 //   }
 // });
 
-
-app.post('/upload-media', async (req, res) => {
+app.post("/upload-media", async (req, res) => {
   try {
     const file = req.files?.media; // fieldname: 'media'
 
     if (!file) {
-      return res.status(400).json({ success: 0, message: 'No file uploaded' });
+      return res.status(400).json({ success: 0, message: "No file uploaded" });
     }
 
     // Detect type from mimetype
     const mimeType = file.mimetype; // e.g., 'image/png' or 'video/mp4'
-    const isVideo = mimeType.startsWith('video/');
-    const resourceType = isVideo ? 'video' : 'image';
+    console.log(file.mimetype);
+    const isVideo = mimeType.startsWith("video/");
+    console.log(isVideo);
+
+    const resourceType = isVideo ? "video" : "image";
 
     const result = await new Promise((resolve, reject) => {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
-          folder: isVideo ? 'eventVideos' : 'eventImages',
+          folder: isVideo ? "eventVideos" : "eventImages",
           resource_type: resourceType,
         },
         (error, result) => {
@@ -275,6 +283,7 @@ app.post('/upload-media', async (req, res) => {
 
       Readable.from(file.data).pipe(uploadStream);
     });
+    console.log(result.secure_url);
 
     return res.json({
       success: 1,
@@ -287,7 +296,6 @@ app.post('/upload-media', async (req, res) => {
   }
 });
 
-
 app.put("/updateEventDetails", async (req, res) => {
   try {
     const updateData = req.body;
@@ -295,8 +303,8 @@ app.put("/updateEventDetails", async (req, res) => {
       { _id: new ObjectId("67fc73d90e889a4b643cc8be") },
       { $set: updateData }
     );
-    console.log(req.body);
 
+    console.log("modifiedCount:"+result.modifiedCount)
     if (result.modifiedCount === 1) {
       res.status(200).send("updated successfully");
     } else {

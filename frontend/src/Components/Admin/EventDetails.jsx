@@ -1,4 +1,4 @@
-import React, { useContext, useState,useRef } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import upload_area from '../../assets/upload_area_dark.png';
 import axios from 'axios';
 import { BASE_URL } from '../../Utils/constants';
@@ -50,31 +50,31 @@ const EventDetails = () => {
     // };
 
 
-      const createImageUrl = async (file) => {
+    const createImageUrl = async (file) => {
         let formdata = new FormData();
         formdata.append('media', file);
         try {
-          let response = await axios.post(`${BASE_URL}upload-media`, formdata, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-            withCredentials: true,
-          });
-    
-          if (response.data.success) {
-            return response.data.image_url;
-          } else {
-            console.error('Upload failed', response.data);
-            return '';
-          }
+            let response = await axios.post(`${BASE_URL}upload-media`, formdata, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                withCredentials: true,
+            });
+
+            if (response.data.success) {
+                return response.data.image_url;
+            } else {
+                console.error('Upload failed', response.data);
+                return '';
+            }
         } catch (err) {
-          console.error('Error uploading image', err);
-          return '';
+            console.error('Error uploading image', err);
+            return '';
         }
-      };
+    };
 
 
-      
+
     const handleImageChange = async (e, index) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -126,7 +126,7 @@ const EventDetails = () => {
             <div className="bg-zinc-950 p-8 rounded-lg shadow-xl w-full max-w-md">
                 <div className='relative'>
                     <button className='absolute top-1 text-base md:text-xl w-3  font-semibold  text-primary'>
-                        <Link to={'/admin/SymposiumDetails'}>                        <i className="fa-solid fa-arrow-left"></i>
+                        <Link to={'/admin/SymposiumDetails'}><i className="fa-solid fa-arrow-left"></i>
                         </Link>
                     </button>
                     <h3 className='text-sm sm:text-base md:text-xl text-primary font-bold text-center mb-10'>Event Details</h3>
