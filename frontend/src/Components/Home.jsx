@@ -117,10 +117,11 @@ const Home = () => {
             <img src={formData?.logo} alt="Gateway Logo" className="w-20 md:w-28" />
             <p className='text-3xl sm:text-4xl md:text-5xl my-4 text-primary text-center font-serif ' style={{ textShadow: "1px 1px 4px #00fff5" }}><b>{formData?.name.toUpperCase()}</b></p>
           </div>
-
-          <button className=" text-primary border border-primary font-bold px-6 py-2 rounded-full mt-5">
-            <Link to="/event">Register</Link>
-          </button>
+          <Link to="/event">
+            <button className=" text-primary border border-primary font-bold px-6 py-2 rounded-full mt-5  hover:bg-primary hover:text-white transition">
+              Register
+            </button>
+          </Link>
         </div>
       </div>
 
@@ -157,20 +158,21 @@ const Home = () => {
         </div>
 
         {/* Carousel Container */}
-        <div className="relative flex flex-col items-center mt-10">
-          <div className="relative w-96 h-64 overflow-hidden mx-auto">
+        <div className="relative flex flex-col items-center mt-10 w-full px-4">
+          <div className="relative w-full max-w-3xl aspect-[3/2] overflow-hidden mx-auto">
             {/* Carousel Content */}
             <div
-              className="flex transition-transform duration-500 ease-in-out"
+              className="flex transition-transform duration-500 ease-in-out h-full"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {formData?.events.map((event, index) => (
-                <div key={index} className="w-96 flex-shrink-0">
-                  <Link to={`/event/${event?._id}`}>
-                    <img src={event.imgUrl} alt={event.name} className="w-full h-5/6 object-center  rounded-lg" />
-                    <p className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-4 py-1 rounded-md text-lg font-semibold">
-                      {event.name}
-                    </p>
+                <div key={index} className="w-full flex-shrink-0 h-full relative">
+                  <Link to={`/event/${event?._id}`} className="block w-full h-full">
+                    <img
+                      src={event.imgUrl}
+                      alt={event.name}
+                      className="w-full h-full object-cover rounded-lg"
+                    />
                   </Link>
                 </div>
               ))}
@@ -178,13 +180,21 @@ const Home = () => {
           </div>
 
           {/* Navigation Buttons */}
-          <button onClick={prevSlide} className="absolute top-1/2 left-4 bg-base-100 -translate-y-1/2  border-primary border text-base w-10 h-10  md:w-12 md:h-12 md:text-xl text-primary p-2 rounded-full">
+          <button
+            onClick={prevSlide}
+            className="absolute top-1/2 left-2 md:left-4 z-10 bg-base-100 -translate-y-1/2 border-primary border text-sm md:text-xl w-8 h-8 md:w-12 md:h-12 text-primary p-2 rounded-full hover:bg-primary hover:text-white transition"
+          >
             ❮
           </button>
-          <button onClick={nextSlide} className="absolute top-1/2 right-4 bg-base-100 -translate-y-1/2 border-primary border text-base w-10 h-10  md:w-12 md:h-12 md:text-xl text-primary p-2 rounded-full">
+          <button
+            onClick={nextSlide}
+            className="absolute top-1/2 right-2 md:right-4 z-10 bg-base-100 -translate-y-1/2 border-primary border text-sm md:text-xl w-8 h-8 md:w-12 md:h-12 text-primary p-2 rounded-full hover:bg-primary hover:text-white transition"
+          >
             ❯
           </button>
         </div>
+
+
       </div>
 
 

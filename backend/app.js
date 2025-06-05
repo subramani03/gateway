@@ -33,7 +33,7 @@ console.log(FRONTEND_BASE_URL);
 
 const connectDB = async () => {
   await mongoose.connect(
-    "mongodb+srv://subramani420:BJht2uUTg5bzfXNx@gateway.ju3xi.mongodb.net/"
+    process.env.MONGODB_URI
   );
 };
 
@@ -108,7 +108,8 @@ app.post("/register", async (req, res) => {
     }
 
     let rollnos = Participants.map((participant) => participant.roll_no);
-    let count = await EventModel.countDocuments({
+    let count = await EventModel.countDo
+cuments({
       college,
       $or: [{ Participant_Rollnos: { $in: rollnos } }],
     });
@@ -332,7 +333,7 @@ app.get("/getEventDetails", async (req, res) => {
 connectDB()
   .then(() => {
     console.log("Database connected successfully");
-    app.listen(3000, () => {
+    app.listen(process.env.PORT, () => {
       console.log("Listening to the port 3000");
     });
   })

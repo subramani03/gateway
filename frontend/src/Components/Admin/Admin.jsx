@@ -244,56 +244,61 @@ const Admin = ({ isAuthenticated }) => {
         FilterRegistrationDetails.length === 0 ? (<div>
           <p className="font-semibold text-center my-36" >No data found</p>
         </div>) : (
-          <div className="p-4 overflow-x-auto">
-            <table className="border-collapse border  border-gray-300 w-full min-w-max text-sm md:text-base">
-              <thead>
-                <tr className="bg-zinc-950 text-primary">
-                  <th className="border p-2">S.No</th>
-                  {/* <th className="border p-2">Participant1 Name</th>
+
+          <div>
+            <div className="p-4 overflow-x-auto">
+              <table className="border-collapse border  border-gray-300 w-full min-w-max text-sm md:text-base">
+                <thead>
+                  <tr className="bg-zinc-950 text-primary">
+                    <th className="border p-2">S.No</th>
+                    {/* <th className="border p-2">Participant1 Name</th>
                   <th className="border p-2">Roll No</th>
                   <th className="border p-2">Participant2 Name</th>
                   <th className="border p-2">Roll No</th> */}
 
-                  {/* Dynamically render participant columns */}
-                  {Array.from({ length: maxParticipants }).map((_, index) => (
-                    <React.Fragment key={index}>
-                      <th className="border p-2">{`Participant${index + 1} Name`}</th>
-                      <th className="border p-2">{`Participant${index + 1} Roll No`}</th>
-                    </React.Fragment>
-                  ))}
-
-
-
-                  <th className="border p-2">College</th>
-                  <th className="border p-2">Event</th>
-                  <th className="border p-2">Phone No</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {FilterRegistrationDetails.map((item, index) => (
-                  <tr key={item._id} className="text-center">
-                    <td className="border p-2">{index + 1}</td>
-                    {/* Participant rows */}
-                    {Array.from({ length: maxParticipants }).map((_, i) => (
-                      <React.Fragment key={i}>
-                        <td className="border p-2">{item.Participants[i]?.name || "-"}</td>
-                        <td className="border p-2">{item.Participants[i]?.roll_no || "-"}</td>
+                    {/* Dynamically render participant columns */}
+                    {Array.from({ length: maxParticipants }).map((_, index) => (
+                      <React.Fragment key={index}>
+                        <th className="border p-2">{`Participant${index + 1} Name`}</th>
+                        <th className="border p-2">{`Participant${index + 1} Roll No`}</th>
                       </React.Fragment>
                     ))}
-                    <td className="border p-2">{item.college}</td>
-                    <td className="border p-2">{item.events}</td>
-                    <td className="border p-2">{item.phoneNo}</td>
-                    <td className="border p-2"> <button
-                      className="text-xs text-red-500 hover:text-white border border-red-500 rounded-full px-3 py-1 hover:bg-red-500 transition"
-                      onClick={() => deleteRegistration(item._id)}
-                    >
-                      Delete
-                    </button></td>
+
+
+
+                    <th className="border p-2">College</th>
+                    <th className="border p-2">Event</th>
+                    <th className="border p-2">Phone No</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {FilterRegistrationDetails.map((item, index) => (
+                    <tr key={item._id} className="text-center">
+                      <td className="border p-2">{index + 1}</td>
+                      {/* Participant rows */}
+                      {Array.from({ length: maxParticipants }).map((_, i) => (
+                        <React.Fragment key={i}>
+                          <td className="border p-2">{item.Participants[i]?.name || "-"}</td>
+                          <td className="border p-2">{item.Participants[i]?.roll_no || "-"}</td>
+                        </React.Fragment>
+                      ))}
+                      <td className="border p-2">{item.college}</td>
+                      <td className="border p-2">{item.events}</td>
+                      <td className="border p-2">{item.phoneNo}</td>
+                      <td className="border p-2"> <button
+                        className="text-xs text-red-500 hover:text-white border border-red-500 rounded-full px-3 py-1 hover:bg-red-500 transition"
+                        onClick={() => deleteRegistration(item._id)}
+                      >
+                        Delete
+                      </button></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <ToastContainer />
+            </div>
             <div className="flex justify-center mt-4">
               <button
                 className="text-xs md:text-sm py-2 px-3 border  border-primary  text-primary rounded-full hover:bg-primary hover:text-white transition"
@@ -301,8 +306,8 @@ const Admin = ({ isAuthenticated }) => {
                 Download
               </button>
             </div>
-            <ToastContainer />
           </div>
+
 
         )
       }

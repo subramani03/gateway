@@ -33,7 +33,7 @@ const SymposiumDetails = () => {
     } catch (err) {
       console.error('Error uploading media', err);
       return '';
-    } 
+    }
   };
 
   const handleInputChange = (e, path) => {
@@ -128,7 +128,7 @@ const SymposiumDetails = () => {
                 setImagePreview(URL.createObjectURL(file));
 
                 // Set uploading to true BEFORE starting upload
-                setUploadStatus("logo",true);
+                setUploadStatus("logo", true);
 
                 const url = await createMediaUrl(file);
                 if (url) {
@@ -136,7 +136,7 @@ const SymposiumDetails = () => {
                 }
 
                 // After upload completes
-                setUploadStatus("logo",false);
+                setUploadStatus("logo", false);
 
               }}
             />
@@ -179,12 +179,12 @@ const SymposiumDetails = () => {
                 const file = e.target.files[0];
                 if (!file) return;
                 setVideoPreview(URL.createObjectURL(file));
-                setUploadStatus("bgVideo",true);
+                setUploadStatus("bgVideo", true);
                 const url = await createMediaUrl(file);
                 if (url) {
                   setFormData(prev => ({ ...prev, back_groud_video: url }));
                 }
-                setUploadStatus("bgVideo",false);
+                setUploadStatus("bgVideo", false);
               }}
             />
           </fieldset>
@@ -285,12 +285,14 @@ const SymposiumDetails = () => {
 
           {/* Navigation */}
           <div className="flex justify-center">
-            <button
-              className="text-xs md:text-sm w-32 py-2 px-3 font-semibold mt-6 border-primary border text-primary rounded-full hover:bg-primary hover:text-white transition"
-              onClick={() => console.log(formData)}
-            >
-              <Link to="/admin/EventDetails">Next</Link>
-            </button>
+            <Link to="/admin/EventDetails">
+              <button
+                className="text-xs md:text-sm w-32 py-2 px-3 font-semibold mt-6 border-primary border text-primary rounded-full hover:bg-primary hover:text-white transition"
+                onClick={() => console.log(formData)}
+              >
+                Next
+              </button>
+            </Link>
           </div>
         </form>
       </div>
