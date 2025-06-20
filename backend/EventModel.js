@@ -35,6 +35,14 @@ const EventSchema = mongoose.Schema(
       maxLength: 50,
       lowercase: true,
     },
+     department: {
+      type: String,
+      required: true,
+      minLength: 3,
+      trim: true,
+      maxLength: 50,
+      lowercase: true,
+    },
     events: {
       type: String,
       required: true,

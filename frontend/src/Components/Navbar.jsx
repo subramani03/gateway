@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import gateway_logo from "../assets/gateway_logo.avif"
 import FormContext from '../Utils/FormContext';
 
 const Navbar = () => {
@@ -53,12 +52,12 @@ const Navbar = () => {
                   <li>
                     <Link to={'/event'} >Events</Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to={'/about'} >About</Link>
-                  </li>
-                  <li>
+                  </li> */}
+                  {/* <li>
                     <a href="https://heyzine.com/flip-book/81d488f5af.html" target="_blank">Magazines</a>
-                  </li>
+                  </li> */}
                 </>
               )
             }

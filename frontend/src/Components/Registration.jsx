@@ -52,6 +52,7 @@ const Registration = () => {
     const [formDatas, setFormDatas] = useState({
         Participants: [],
         college: "",
+        department:"",
         phoneNo: "",
         events: []
     });
@@ -191,6 +192,19 @@ const Registration = () => {
                             type="text"
                             name="college"
                             value={formDatas.college}
+                            onChange={handleChange}
+                            placeholder="Type here"
+                            className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
+                            required
+                        />
+                    </fieldset>
+
+                    <fieldset className="fieldset">
+                        <legend className="font-semibold mb-1 md:text-sm text-xs">Department</legend>
+                        <input
+                            type="text"
+                            name="department"
+                            value={formDatas.department}
                             onChange={handleChange}
                             placeholder="Type here"
                             className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"

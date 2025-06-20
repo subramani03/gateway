@@ -30,18 +30,18 @@ const EventRule = () => {
       {/* {eventData.events.map((event, index) => ( */}
       <div>
         <div className='flex flex-col items-center'>
-          <h2 className='text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold text-center'>{event.name}</h2>
+          <h2 className='text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold text-center'>{event?.name}</h2>
           <div className="mx-10 w-10 h-1 bg-primary"></div>
         </div>
 
-        <p className='text-xs  md:text-sm text-center my-2'>{event.description}</p>
+        <p className='text-xs  md:text-sm text-center my-2'>{event?.description}</p>
         <div className='mt-2 border border-zinc-800 border-solid'></div>
 
         <h2 className='text-lg sm:text-xl md:text-2xl font-semibold m-3 text-primary mt-3'>Rules and regulation</h2>
 
         <ul className='text-sm  md:text-base list-disc marker:text-primary' >
           {
-            event.rules.map((rule, index) => {
+            event?.rules?.map((rule, index) => {
               return (
                 <li key={index} className='mt-1'>{rule}</li>
               )
@@ -50,9 +50,9 @@ const EventRule = () => {
         </ul>
 
         <ul className='font-semibold my-8 px-2 text-sm  md:text-base'>
-          <li className='flex items-center gap-2 mt-2'><i className="fa-solid fa-calendar-days text-primary"></i><span className='text-primary'>Date :</span>{event.date.split('T')[0]}</li>
-          <li className='flex items-center gap-1 mt-2'><i className="fa-solid fa-clock text-primary "></i><span className='text-primary'>Time  :</span>{event.time}</li>
-          <li className='flex items-center gap-2 mt-2'><i className="fa-solid fa-location-dot text-primary"></i><span className='text-primary'>Venue :</span>{event.venue}</li>
+          <li className='flex items-center gap-2 mt-2'><i className="fa-solid fa-calendar-days text-primary"></i><span className='text-primary'>Date :</span>{event?.date.split('T')[0]}</li>
+          <li className='flex items-center gap-1 mt-2'><i className="fa-solid fa-clock text-primary "></i><span className='text-primary'>Time  :</span>{event?.time}</li>
+          <li className='flex items-center gap-2 mt-2'><i className="fa-solid fa-location-dot text-primary"></i><span className='text-primary'>Venue :</span>{event?.venue}</li>
         </ul>
 
         <div className='flex justify-center mt-5'>

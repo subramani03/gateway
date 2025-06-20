@@ -90,10 +90,9 @@ app.delete("/deteteOneRegistration/:id", UserAuth, async (req, res) => {
 app.post("/register", async (req, res) => {
   try {
     console.log(req.body.formDatas);
-    const { Participants, college, phoneNo, events } = req?.body?.formDatas;
+    const { Participants, college,department, phoneNo, events } = req?.body?.formDatas;
 
-    console.log(req.body.formData);
-    console.log("events length:" + events.length);
+    // console.log("events length:" + events.length);
 
     if (!events || !Array.isArray(events) || events.length === 0) {
       return res.status(400).send("Events must be a non-empty array");
@@ -108,8 +107,7 @@ app.post("/register", async (req, res) => {
     }
 
     let rollnos = Participants.map((participant) => participant.roll_no);
-    let count = await EventModel.countDo
-cuments({
+    let count = await EventModel.countDocuments({
       college,
       $or: [{ Participant_Rollnos: { $in: rollnos } }],
     });
@@ -138,6 +136,7 @@ cuments({
       return {
         Participants,
         Participant_Rollnos: rollnos,
+        department,
         college,
         phoneNo,
         events,
@@ -156,7 +155,7 @@ cuments({
 app.get("/getregisterationdetails", UserAuth, async (req, res) => {
   try {
     const user = await EventModel.find({}).select(
-      "Participants college phoneNo events"
+      "Participants college department phoneNo events"
     );
     res.send(user);
   } catch (err) {
