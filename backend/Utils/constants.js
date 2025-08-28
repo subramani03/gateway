@@ -4,7 +4,7 @@
 const BASE_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/'
-    : 'https://gateway-api-beta.vercel.app/';
+    : 'https://gateway-6epe.onrender.com/';
 
 const FRONTEND_BASE_URL =
   process.env.NODE_ENV === 'development'
