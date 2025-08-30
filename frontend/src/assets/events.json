@@ -1,0 +1,100 @@
+{
+    "name": "Gateway",
+    "description": "A NATIONAL LEVEL INTER COLLEGIATE TECHNICAL SYMPOSIUM",
+    "about":"One Day National Level Inter Collegiate Technical Symposiums is scheduled on 12th March, 2025 . We cordially invite you all for the same and motivate your students to actively participate in this mega event.",
+    "organizers": "DEPARTMENT OF COMPUTATIONAL SCIENCES",
+    "organizers_description": "(CS, MCA, BCA, IT, SS, CT, NMA, DA)",
+    "logo": "url",
+    "back_groud_video": "video url",
+    "Date": "2021-01-01",
+    "venue": "E-block,psgcas",
+    "RegistrationFees":150,
+    "social_media": {
+        "instagram": "Gateway_psg",
+        "mail": "smani32006@gmail.com"
+    },
+    "contact": {
+        "forRegistrationDetails": [
+            {
+                "name": "Mani",
+                "ph_no": 9384725988
+            },
+            {
+                "name": "Surya",
+                "ph_no": 9025109162
+            }
+        ],
+        "forEventDetails": [
+            {
+                "name": "Sudha",
+                "ph_no": 9965464663
+            },
+            {
+                "name": "Gowri",
+                "ph_no": 9987654321
+            }
+        ]
+    },
+    "events": [
+    {
+        "id": 1,
+        "name": "WebClash",
+        "date": "2021-01-01",
+        "location": "Location 1",
+        "imgUrl": "https://img.freepik.com/premium-photo/black-background-with-word-web-design-it_939033-77173.jpg",
+        "time": "10:00",
+        "description": "Web desiging",
+        "rules": [
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at.Minima vel voluptatum, veniam ratione inventore ea?  Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. "
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Run baby run",
+        "date": "2021-02-02",
+        "location": "Location 2",
+        "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQMm-XjqGWX9j0G0lXFw2JJCqX16SVLXPJYEh0tSO5Kpk-qzu_n9ITyJwdtAqI5hTqGok&usqp=CAU",
+        "time": "10:00",
+        "description": "Treasure Hunt",
+        "rules": [
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at.Minima vel voluptatum, veniam ratione inventore ea?  Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. "
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Kissik",
+        "date": "2021-03-03",
+        "location": "Location 3",
+        "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0sR4h2BVLGL5ZzFOkOrZ-xNWDCDcsTBJPpYfrB5W2Yaq4W47AmwqPlHjbZzjXyoj09Rw&usqp=CAU",
+        "time": "10:00",
+        "description": "Photography",
+        "rules": [
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at.Minima vel voluptatum, veniam ratione inventore ea?  Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. "
+        ]
+    },
+    {
+        "id": 4,
+        "name": "logomania",
+        "date": "2021-01-01",
+        "location": "Location 3",
+        "imgUrl": "https://i.pinimg.com/736x/f0/ab/1a/f0ab1aed22265a50d92c81c66d742c7b.jpg",
+        "time": "10:00",
+        "description": "Logo desinging",
+        "rules": [
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at. Minima vel voluptatum, veniam ratione inventore ea?",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, deleniti? Fugiat, neque at.Minima vel voluptatum, veniam ratione inventore ea?  Lorem ipsum dolor sit amet, consectetur adipisicing elit",
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. "
+        ]
+    }
+]
+}
