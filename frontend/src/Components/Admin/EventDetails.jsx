@@ -180,7 +180,7 @@ const EventDetails = () => {
                                     placeholder="Event Description"
                                     value={event.description}
                                     onChange={(e) => handleEventChange(index, 'description', e.target.value)}
-                                    className="w-full p-3 rounded-xl bg-zinc-900 border border-zinc-600 text-white"
+                                    className="w-full p-3 textarea rounded-xl bg-zinc-900 border border-zinc-600 text-white"
                                     rows={3}
                                     required
                                 />
@@ -218,7 +218,7 @@ const EventDetails = () => {
                                             setFormData(updated);
                                         }}
                                         placeholder={`Rule ${rIdx + 1}`}
-                                        className="w-full p-2 pr-10 rounded-xl bg-zinc-900 border border-zinc-600 text-white resize-none"
+                                        className="w-full p-2 pr-10 textarea rounded-xl bg-zinc-900 border border-zinc-600 text-white resize-none"
                                         rows={2}
                                         required
                                     />

@@ -60,7 +60,7 @@ const SymposiumDetails = () => {
                   <textarea
                     value={formData?.[field] || ''}
                     onChange={(e) => handleInputChange(e, field)}
-                    className="w-full p-3 bg-zinc-900 border border-zinc-600 rounded-xl text-white text-sm resize-none h-32"
+                    className="w-full p-3 bg-zinc-900 border input border-zinc-600 rounded-xl text-white text-sm resize-none h-32"
                     rows={1}
                     required
                   />
@@ -69,7 +69,7 @@ const SymposiumDetails = () => {
                     type={field === 'Date' ? 'date' : 'text'}
                     value={field === 'Date' ? (formData?.[field] ? formData[field].split('T')[0] : '') : formData?.[field] || ''}
                     onChange={(e) => handleInputChange(e, field)}
-                    className="w-full p-3 bg-zinc-900 border border-zinc-600 rounded-xl text-white text-sm"
+                    className="w-full p-3 input bg-zinc-900 border border-zinc-600 rounded-xl text-white text-sm"
                     required
                   />
                 )}
