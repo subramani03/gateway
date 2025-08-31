@@ -8,7 +8,7 @@ const Footer = () => {
       <div className='w-full h-0.5 bg-gray-500'></div>
       <div className='flex justify-between items-center py-5'>
         <div>
-          <p className='text-xs md:text-sm mb-4 text-primary'>{`© 2025 ${formData?.name}. All rights reserved.`}</p>
+          <p className='text-xs md:text-sm mb-4 text-primary'>{`© ${new Date().getFullYear()} ${formData?.name}. All rights reserved.`}</p>
           <div className='flex gap-5 items-center mb-2'>
           <i className="fa-brands fa-instagram text-primary"></i>
           <p className='text-xs md:text-sm'><a href={`https://www.instagram.com/${formData?.social_media?.instagram}/`} target='_blank'>{formData?.social_media?.instagram}</a></p>

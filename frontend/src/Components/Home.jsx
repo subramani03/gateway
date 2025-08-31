@@ -51,11 +51,11 @@ const Home = () => {
   }, [timeCounter])
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev === 0 ? eventData.events.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? formData?.events.length - 1 : prev - 1));
   };
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev === eventData.events.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === formData?.events.length - 1 ? 0 : prev + 1));
   };
 
   if (!formData) {
