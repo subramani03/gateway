@@ -32,9 +32,7 @@ app.use(
 console.log(FRONTEND_BASE_URL);
 
 const connectDB = async () => {
-  await mongoose.connect(
-    process.env.MONGODB_URI
-  );
+  await mongoose.connect(process.env.MONGODB_URI);
 };
 
 let isRegistrationClosed = false; // Global state in server
@@ -72,25 +70,25 @@ app.delete("/deteteRegistration", UserAuth, async (req, res) => {
 
 app.delete("/deteteOneRegistration/:id", UserAuth, async (req, res) => {
   try {
-    let {id}=req.params;
+    let { id } = req.params;
     console.log(id);
-    const result = await EventModel.deleteOne({_id:id})
+    const result = await EventModel.deleteOne({ _id: id });
 
-    if(result.deletedCount === 0){
+    if (result.deletedCount === 0) {
       res.send("no records matched to delete");
     }
     res.send("Deleted Succesfully");
-    console.log(result +"Deleted");
+    console.log(result + "Deleted");
   } catch (err) {
     res.status(400).send("Error in deleting the registration details :" + err);
   }
 });
 
-
 app.post("/register", async (req, res) => {
   try {
     console.log(req.body.formDatas);
-    const { Participants, college,department, phoneNo, events } = req?.body?.formDatas;
+    const { Participants, college, department, phoneNo, events } =
+      req?.body?.formDatas;
 
     // console.log("events length:" + events.length);
 
@@ -185,7 +183,6 @@ app.post("/adminLogin", async (req, res) => {
     res.status(400).send("Invalid credentials");
   }
 });
-
 
 app.get("/checkAuth", (req, res) => {
   const token = req.cookies.token; // Retrieve the token from the cookies
@@ -299,12 +296,14 @@ app.post("/upload-media", async (req, res) => {
 app.put("/updateEventDetails", async (req, res) => {
   try {
     const updateData = req.body;
+    console.log(updateData);
     const result = await symposiumModel.updateOne(
       { _id: new ObjectId("67fc73d90e889a4b643cc8be") },
-      { $set: updateData }
+      { $set: updateData },
+      { runValidators: true } // <-- force schema validation
     );
 
-    console.log("modifiedCount:"+result.modifiedCount)
+    console.log("modifiedCount:" + result.modifiedCount);
     if (result.modifiedCount === 1) {
       res.status(200).send("updated successfully");
     } else {
