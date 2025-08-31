@@ -17,7 +17,7 @@ const Registration = () => {
     const [teamSize, setTeamSize] = useState(initialTeamSize);
 
     // Load Event options from context or localStorage
-    const EventOptions = formData?.events.map((event) => event?.name) || savedFormData?.events.map((event) => event?.name) ;
+    const EventOptions = formData?.events.map((event) => event?.name) || savedFormData?.events.map((event) => event?.name);
     console.log(EventOptions);
 
 
@@ -52,10 +52,16 @@ const Registration = () => {
     const [formDatas, setFormDatas] = useState({
         Participants: [],
         college: "",
-        department:"",
+        department: "",
         phoneNo: "",
         events: []
     });
+
+    useEffect(() => {
+        if (formData?.symposiumType === "intra") {
+            setFormDatas(prev => ({ ...prev, college: "PSGCAS" }));
+        }
+    }, [formData?.symposiumType, setFormDatas]);
 
     // Initialize participants array
     useEffect(() => {
@@ -186,7 +192,27 @@ const Registration = () => {
                         </div>
                     ))}
 
-                    <fieldset className="fieldset">
+
+                    {formData?.symposiumType === "intra" ?
+                        (
+                            // Hidden input only (not visible to user, but sent to backend)
+                            <input type="hidden" name="college" value="PSGCAS" />
+                        ) : (
+                            <fieldset className="fieldset">
+                                <legend className="font-semibold mb-1 text-xs md:text-sm">College Name</legend>
+                                <input
+                                    type="text"
+                                    name="college"
+                                    value={formDatas.college}
+                                    onChange={handleChange}
+                                    placeholder="Type here"
+                                    className="input w-full p-3 text-sm border border-primary rounded-lg focus:ring-2 focus:ring-primary outline-none bg-black/30 placeholder-gray-400 transition-all"
+                                    required
+                                />
+                            </fieldset>
+                        )}
+
+                    {/* <fieldset className="fieldset">
                         <legend className="font-semibold mb-1 md:text-sm text-xs">College Name</legend>
                         <input
                             type="text"
@@ -197,7 +223,7 @@ const Registration = () => {
                             className="input text-sm w-full p-3 border border-primary rounded-lg focus:ring focus:ring-primary"
                             required
                         />
-                    </fieldset>
+                    </fieldset> */}
 
                     <fieldset className="fieldset">
                         <legend className="font-semibold mb-1 md:text-sm text-xs">Department</legend>

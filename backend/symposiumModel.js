@@ -23,6 +23,7 @@ const symposiumSchema = new mongoose.Schema({
   organizers_description: { type: String, required: true },
   logo: { type: String },
   back_groud_video: { type: String },
+  symposiumType: { type: String, enum: ["inter", "intra"], default: "inter" },
   Date: { type: Date, required: true },
   location: { type: String, required: true },
   time: { type: String, required: true },

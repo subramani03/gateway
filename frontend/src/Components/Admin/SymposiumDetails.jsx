@@ -138,6 +138,24 @@ const SymposiumDetails = () => {
               </fieldset>
             </div>
 
+            <fieldset className="fieldset my-4">
+              <legend className="text-sm font-semibold text-gray-400 mt-4 mb-2">Symposium Type</legend>
+              <select
+                className="select select-bordered w-full p-2 bg-zinc-900 border border-zinc-600 rounded-xl text-white text-sm"
+                name="symposiumType"
+                value={formData?.symposiumType || ""}
+                onChange={(e) => setFormData({ ...formData, symposiumType: e.target.value })}
+              >
+                <option value="" disabled>
+                  Select Symposium Type
+                </option>
+                <option value="inter">Inter-College</option>
+                <option value="intra">Intra-College (PSGCAS Only)</option>
+              </select>
+            </fieldset>
+
+
+
             <h1 className="font-bold mt-8 text-white">Contact Details</h1>
 
             <h3 className="font-semibold text-primary mt-4 mb-2">For Registration</h3>
