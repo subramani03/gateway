@@ -206,7 +206,7 @@ const EventDetails = () => {
                             />
                         </fieldset>
 
-                        <div>
+                        {/* <div>
                             <label className="block text-sm text-gray-400 mb-2">Rules</label>
                             {event.rules.map((rule, rIdx) => (
                                 <div key={rIdx} className="flex gap-2 mb-2">
@@ -242,7 +242,97 @@ const EventDetails = () => {
                             >
                                 + Add Rule
                             </button>
+                        </div> */}
+
+                        <div>
+                            <label className="block text-sm text-gray-400 mb-2">Rounds</label>
+                            {event.rounds?.map((round, roundIdx) => (
+                                <div key={roundIdx} className="mb-4 p-3 border border-zinc-700 rounded-xl">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <input
+                                            type="text"
+                                            value={round.roundName}
+                                            placeholder={`Round ${roundIdx + 1}`}
+                                            onChange={(e) => {
+                                                const updated = { ...formData };
+                                                updated.events[index].rounds[roundIdx].roundName = e.target.value;
+                                                setFormData(updated);
+                                            }}
+                                            className="w-full p-2 rounded-xl bg-zinc-900 border border-zinc-600 text-white"
+                                            required
+                                        />
+                                        {event.rounds.length > 1 && (
+                                            <button
+                                                onClick={() => {
+                                                    const updated = { ...formData };
+                                                    updated.events[index].rounds.splice(roundIdx, 1);
+                                                    setFormData(updated);
+                                                }}
+                                                className="ml-2 text-red-500 hover:text-red-700"
+                                            >
+                                                <i className="fa-solid fa-xmark"></i>
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {/* Rules inside this round */}
+                                    {round.rules.map((rule, rIdx) => (
+                                        <div key={rIdx} className="flex gap-2 mb-2">
+                                            <textarea
+                                                value={rule}
+                                                onChange={(e) => {
+                                                    const updated = { ...formData };
+                                                    updated.events[index].rounds[roundIdx].rules[rIdx] = e.target.value;
+                                                    setFormData(updated);
+                                                }}
+                                                placeholder={`Rule ${rIdx + 1}`}
+                                                className="w-full p-2 textarea rounded-xl bg-zinc-900 border border-zinc-600 text-white resize-none"
+                                                rows={2}
+                                                required
+                                            />
+                                            {round.rules.length > 1 && (
+                                                <button
+                                                    onClick={() => {
+                                                        const updated = { ...formData };
+                                                        updated.events[index].rounds[roundIdx].rules.splice(rIdx, 1);
+                                                        setFormData(updated);
+                                                    }}
+                                                    className="text-red-500 hover:text-red-700"
+                                                >
+                                                    <i className="fa-solid fa-xmark"></i>
+                                                </button>
+                                            )}
+                                        </div>
+                                    ))}
+
+                                    <button
+                                        onClick={() => {
+                                            const updated = { ...formData };
+                                            updated.events[index].rounds[roundIdx].rules.push('');
+                                            setFormData(updated);
+                                        }}
+                                        className="text-sm text-primary hover:underline mt-1"
+                                    >
+                                        + Add Rule
+                                    </button>
+                                </div>
+                            ))}
+
+                            <button
+                                onClick={() => {
+                                    const updated = { ...formData };
+                                    updated.events[index].rounds.push({
+                                        roundName: `Round ${event.rounds.length + 1}`,
+                                        rules: ['']
+                                    });
+                                    setFormData(updated);
+                                }}
+                                className="text-sm text-green-500 hover:underline mt-2"
+                            >
+                                + Add Round
+                            </button>
                         </div>
+
                     </div>
                 ))}
 

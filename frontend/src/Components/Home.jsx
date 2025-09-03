@@ -109,14 +109,13 @@ const Home = () => {
           </h3>
           <h6 className="text-xs md:text-sm font-mono"> {formData?.organizers_description}</h6>
           <h4 className="text-lg font-semibold">Organizes</h4>
-          <p className="text-xs sm:text-lg md:text-xl font-semibold">
-            {formData?.description}
-          </p>
-
           <div className="flex items-center justify-center mt-5 sm:mt-2">
             <img src={formData?.logo} alt="Gateway Logo" className="w-20 md:w-28" />
             <p className='text-3xl sm:text-4xl md:text-5xl my-4 text-primary text-center font-serif ' style={{ textShadow: "1px 1px 4px #00fff5" }}><b>{formData?.name.toUpperCase()}</b></p>
           </div>
+           <p className="text-xs sm:text-lg md:text-xl font-semibold -mt-3">
+            {formData?.description}
+          </p>
           <Link to="/event">
             <button className=" text-primary border border-primary font-bold px-6 py-2 rounded-full mt-5  hover:bg-primary hover:text-white transition">
               Register

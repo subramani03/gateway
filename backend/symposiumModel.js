@@ -5,6 +5,11 @@ const contactPersonSchema = new mongoose.Schema({
   ph_no: { type: Number, required: true }
 });
 
+const roundSchema = new mongoose.Schema({
+  roundName: { type: String, required: true },   // e.g., "Round 1"
+  rules: [{ type: String, required: true }]      // list of rules for that round
+});
+
 const eventSchema = new mongoose.Schema({
   name: { type: String, required: true },
   date: { type: Date, required: true },
@@ -12,7 +17,8 @@ const eventSchema = new mongoose.Schema({
   imgUrl: { type: String, required: true },
   time: { type: String, required: true },
   description: { type: String, required: true },
-  rules: [{ type: String }]
+
+  rounds: [roundSchema]  // <-- Instead of plain rules
 });
 
 const symposiumSchema = new mongoose.Schema({
