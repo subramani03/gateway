@@ -19,15 +19,15 @@ const Footer = () => {
           </div>
         </div>
         <div>
-          <p className="text-md text-primary font-bold text-center mb-3">Contact</p>
+          <p className="text-xs md:text-sm text-primary font-bold text-center mb-3">Contact</p>
           <div className='flex flex-col justify-center gap-5 items-center sm:flex-row'>
             <div className='text-center'>
-              <p className="text-sm md:text-md text-primary font-bold ">For Registration details</p>
+              <p className="text-xs md:text-sm text-primary font-bold ">For Registration details</p>
               <p className='text-xs md:text-sm mt-1'>{`${formData?.contact?.forRegistrationDetails[0]?.name} -`} <a href={`tel:+${formData?.contact?.forRegistrationDetails[0]?.ph_no}`} >{formData?.contact?.forRegistrationDetails[0]?.ph_no}</a></p>
               <p className='text-xs md:text-sm mt-1'>{`${formData?.contact?.forRegistrationDetails[1]?.name} -`} <a href={`tel:+${formData?.contact?.forRegistrationDetails[1]?.ph_no}`} >{formData?.contact?.forRegistrationDetails[1]?.ph_no}</a></p>
             </div>
             <div className='text-center'>
-              <p className="text-sm md:text-md text-primary font-bold">For Event details</p>
+              <p className="text-xs md:text-sm text-primary font-bold">For Event details</p>
               <p className='text-xs md:text-sm mt-1'>{`${formData?.contact?.forEventDetails[0]?.name} -`} <a href={`tel:+${formData?.contact?.forEventDetails[0]?.ph_no}`} >{formData?.contact?.forEventDetails[0]?.ph_no}</a></p>
               <p className='text-xs md:text-sm mt-1'>{`${formData?.contact?.forEventDetails[1]?.name} -`} <a href={`tel:+${formData?.contact?.forEventDetails[1]?.ph_no}`} >{formData?.contact?.forEventDetails[1]?.ph_no}</a></p>
             </div>

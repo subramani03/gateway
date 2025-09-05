@@ -73,7 +73,7 @@ const EventRule = () => {
                     transition={{ duration: 0.3 }}
                     className="px-4 sm:px-6 pb-4"
                   >
-                    <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base">
+                    <ul className="space-y-2 sm:space-y-3 text-sm md:text-base">
                       {round.rules.map((rule, idx) => (
                         <li
                           key={idx}

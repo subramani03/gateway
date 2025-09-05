@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import clg_logo from '../assets/clg_logo.avif';
-import clg_iso_certified_img from '../assets/clg_iso_certified_img.avif';
+import  psgDimondlogo from '../assets/psgDiamondLogo.png';
 import bgvideo from '../assets/021794daa81f80dbf49fc06af2091714 (1).mp4';
 // import gateway_logo from '../assets/gateway_logo.png';
-import eventData from '../assets/events.json';
 import FormContext from '../Utils/FormContext';
 
 const Home = () => {
@@ -92,7 +91,7 @@ const Home = () => {
             <h2 className="text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold text-white">
               PSG COLLEGE OF ARTS & SCIENCE
             </h2>
-            <img src={clg_iso_certified_img} alt="ISO Certification" className="w-16 md:w-24 rounded-md" />
+            <img src={psgDimondlogo} alt="ISO Certification" className="w-16 md:w-24 rounded-md" />
           </div>
 
           {/* <div className="flex flex-col text-xs md:text-sm font-semibold text-center">
@@ -110,10 +109,10 @@ const Home = () => {
           <h6 className="text-xs md:text-sm font-mono"> {formData?.organizers_description}</h6>
           <h4 className="text-lg font-semibold">Organizes</h4>
           <div className="flex items-center justify-center mt-5 sm:mt-2">
-            <img src={formData?.logo} alt="Gateway Logo" className="w-20 md:w-28" />
+            <img src={formData?.logo} alt="Gateway Logo" className="w-20 md:w-28 rounded-full h-20 md:h-28" />
             <p className='text-3xl sm:text-4xl md:text-5xl my-4 text-primary text-center font-serif ' style={{ textShadow: "1px 1px 4px #00fff5" }}><b>{formData?.name.toUpperCase()}</b></p>
           </div>
-           <p className="text-xs sm:text-lg md:text-xl font-semibold -mt-3">
+          <p className="text-xs sm:text-lg md:text-xl font-semibold -mt-3">
             {formData?.description}
           </p>
           <Link to="/event">
@@ -151,26 +150,33 @@ const Home = () => {
 
       {/* Events Carousel Section */}
       <div className="m-auto w-full md:w-5/6 lg:w-4/6 p-10">
-        <div className='flex flex-col items-start'>
-          <h2 className='text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold mt-8'>Events</h2>
+        <div className="flex flex-col items-start">
+          <h2 className="text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold mt-8">
+            Events
+          </h2>
           <div className="mx-2 w-10 h-1 text-center bg-primary"></div>
         </div>
 
         {/* Carousel Container */}
         <div className="relative flex flex-col items-center mt-10 w-full px-4">
-          <div className="relative w-full max-w-3xl aspect-[3/2] overflow-hidden mx-auto">
+          <div className="relative w-full max-w-3xl aspect-[3/2] overflow-hidden mx-auto bg-black rounded-lg flex items-center justify-center">
             {/* Carousel Content */}
             <div
               className="flex transition-transform duration-500 ease-in-out h-full"
               style={{ transform: `translateX(-${currentIndex * 100}%)` }}
             >
               {formData?.events.map((event, index) => (
-                <div key={index} className="w-full flex-shrink-0 h-full relative">
+                <div
+                  key={index}
+                  className="w-full flex-shrink-0 h-full flex items-center justify-center"
+                >
                   <Link to={`/event/${event?._id}`} className="block w-full h-full">
                     <img
                       src={event.imgUrl}
                       alt={event.name}
-                      className="w-full h-full object-cover rounded-lg"
+                      className="w-full h-full object-contain rounded-lg p-4 
+                           max-h-[250px] sm:max-h-[300px] md:max-h-[350px] lg:max-h-[400px] 
+                           mx-auto"
                     />
                   </Link>
                 </div>
@@ -181,20 +187,24 @@ const Home = () => {
           {/* Navigation Buttons */}
           <button
             onClick={prevSlide}
-            className="absolute top-1/2 left-2 md:left-4 z-10 bg-base-100 -translate-y-1/2 border-primary border text-sm md:text-xl w-8 h-8 md:w-12 md:h-12 text-primary p-2 rounded-full hover:bg-primary hover:text-white transition"
+            className="absolute top-1/2 left-2 md:left-4 z-10 bg-base-100 -translate-y-1/2 
+                 border-primary border text-sm md:text-xl w-8 h-8 md:w-12 md:h-12 
+                 text-primary p-2 rounded-full hover:bg-primary hover:text-white transition"
           >
             ❮
           </button>
           <button
             onClick={nextSlide}
-            className="absolute top-1/2 right-2 md:right-4 z-10 bg-base-100 -translate-y-1/2 border-primary border text-sm md:text-xl w-8 h-8 md:w-12 md:h-12 text-primary p-2 rounded-full hover:bg-primary hover:text-white transition"
+            className="absolute top-1/2 right-2 md:right-4 z-10 bg-base-100 -translate-y-1/2 
+                 border-primary border text-sm md:text-xl w-8 h-8 md:w-12 md:h-12 
+                 text-primary p-2 rounded-full hover:bg-primary hover:text-white transition"
           >
             ❯
           </button>
         </div>
-
-
       </div>
+
+
 
 
 

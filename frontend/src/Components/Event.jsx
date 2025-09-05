@@ -31,7 +31,7 @@ const Event = () => {
 
       <div className="w-full max-w-7xl mx-auto">
         {/* ✅ Event Cards Grid (max 3 per row, clean layout) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 place-items-center">
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 place-items-center">
           {formData?.events?.map((event, index) => (
             <motion.div
               key={index}
@@ -60,7 +60,38 @@ const Event = () => {
               </Link>
             </motion.div>
           ))}
+        </div> */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6 place-items-center">
+  {formData?.events?.map((event, index) => (
+    <motion.div
+      key={index}
+      whileHover={{ scale: 1.05 }}
+      transition={{ type: 'spring', stiffness: 200 }}
+      className="w-full max-w-xs"
+    >
+      <Link to={`/event/${event._id}`}>
+        <div className="bg-zinc-950 border border-zinc-800 rounded-2xl overflow-hidden shadow-md hover:shadow-primary transition-shadow duration-300 h-80 flex flex-col">
+          <figure className="h-44 w-full flex items-center justify-center bg-black">
+            <img
+              className="max-h-full max-w-full object-contain p-4 transition-transform duration-500"
+              src={event.imgUrl}
+              alt={event.name}
+            />
+          </figure>
+          <div className="p-4 flex flex-col flex-grow">
+            <h2 className="text-primary font-semibold text-lg truncate">
+              {event.name}
+            </h2>
+            <p className="text-xs sm:text-sm text-white opacity-80 mt-2 line-clamp-3">
+              {event.description}
+            </p>
+          </div>
         </div>
+      </Link>
+    </motion.div>
+  ))}
+</div>
+
 
         {/* ✅ Advanced General Rules Section */}
         <div className="w-full md:w-5/6 lg:w-4/6 mx-auto mt-10 px-10">
