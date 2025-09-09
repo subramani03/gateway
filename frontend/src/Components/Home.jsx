@@ -117,12 +117,7 @@ const Home = () => {
           </p>
           <Link to="/event">
             <button
-              className="text-xs sm:text-sm md:text-base lg:text-lg 
-             text-primary border border-primary font-bold
-             px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 
-             rounded-full mt-4 sm:mt-5
-             hover:bg-primary hover:text-white transition
-             w-auto sm:w-fit"
+              className="text-xs md:text-sm w-32 py-2 px-3 font-semibold mt-6 border-primary border lg:text-base text-primary rounded-full hover:bg-primary hover:text-white transition"
             >
               Register
             </button>
@@ -135,83 +130,101 @@ const Home = () => {
 
       {/* counttown */}
       <div className="m-auto w-full md:w-5/6 lg:w-4/6 p-4 sm:p-6 md:p-10 flex gap-2 sm:gap-4 md:gap-9 items-center justify-center mt-6 md:mt-16">
-  <div className='p-2 sm:p-3 bg-zinc-950 w-20 sm:w-28 md:w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary text-center'>
-    <p className='text-xl sm:text-3xl md:text-6xl font-semibold'>{timeCounter.day}</p>
-    <p className='text-xs sm:text-base md:text-lg text-primary font-bold mt-1'>Days</p>
-  </div>
-  <div className='p-2 sm:p-3 bg-zinc-950 w-20 sm:w-28 md:w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary text-center'>
-    <p className='text-xl sm:text-3xl md:text-6xl font-semibold'>{timeCounter.hours}</p>
-    <p className='text-xs sm:text-base md:text-lg text-primary font-bold mt-1'>Hours</p>
-  </div>
-  <div className='p-2 sm:p-3 bg-zinc-950 w-20 sm:w-28 md:w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary text-center'>
-    <p className='text-xl sm:text-3xl md:text-6xl font-semibold'>{timeCounter.minutes}</p>
-    <p className='text-xs sm:text-base md:text-lg text-primary font-bold mt-1'>Minutes</p>
-  </div>
-  <div className='p-2 sm:p-3 bg-zinc-950 w-20 sm:w-28 md:w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary text-center'>
-    <p className='text-xl sm:text-3xl md:text-6xl font-semibold'>{timeCounter.seconds}</p>
-    <p className='text-xs sm:text-base md:text-lg text-primary font-bold mt-1'>Seconds</p>
-  </div>
-</div>
-
-
-      {/* Events Carousel Section */}
-      <div className="m-auto w-full md:w-5/6 lg:w-4/6 p-10">
-        <div className="flex flex-col items-start">
-          <h2 className="text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold mt-8">
-            Events
-          </h2>
-          <div className="mx-2 w-10 h-1 text-center bg-primary"></div>
+        <div className='p-2 sm:p-3 bg-zinc-950 w-20 sm:w-28 md:w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary text-center'>
+          <p className='text-xl sm:text-3xl md:text-6xl font-semibold'>{timeCounter.day}</p>
+          <p className='text-xs sm:text-base md:text-lg text-primary font-bold mt-1'>Days</p>
         </div>
-
-        {/* Carousel Container */}
-        <div className="relative flex flex-col items-center mt-10 w-full px-4">
-          <div className="relative w-full max-w-3xl aspect-[3/2] overflow-hidden mx-auto bg-black rounded-lg flex items-center justify-center">
-            {/* Carousel Content */}
-            <div
-              className="flex transition-transform duration-500 ease-in-out h-full"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {formData?.events.map((event, index) => (
-                <div
-                  key={index}
-                  className="w-full flex-shrink-0 h-full flex items-center justify-center"
-                >
-                  <Link to={`/event/${event?._id}`} className="block w-full h-full">
-                    <img
-                      src={event.imgUrl}
-                      alt={event.name}
-                      className="w-full h-full object-contain rounded-lg p-4 
-                           max-h-[250px] sm:max-h-[300px] md:max-h-[350px] lg:max-h-[400px] 
-                           mx-auto"
-                    />
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigation Buttons */}
-          <button
-            onClick={prevSlide}
-            className="absolute top-1/2 left-2 md:left-4 z-10 bg-base-100 -translate-y-1/2 
-                 border-primary border text-sm md:text-xl w-8 h-8 md:w-12 md:h-12 
-                 text-primary p-2 rounded-full hover:bg-primary hover:text-white transition"
-          >
-            ❮
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute top-1/2 right-2 md:right-4 z-10 bg-base-100 -translate-y-1/2 
-                 border-primary border text-sm md:text-xl w-8 h-8 md:w-12 md:h-12 
-                 text-primary p-2 rounded-full hover:bg-primary hover:text-white transition"
-          >
-            ❯
-          </button>
+        <div className='p-2 sm:p-3 bg-zinc-950 w-20 sm:w-28 md:w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary text-center'>
+          <p className='text-xl sm:text-3xl md:text-6xl font-semibold'>{timeCounter.hours}</p>
+          <p className='text-xs sm:text-base md:text-lg text-primary font-bold mt-1'>Hours</p>
+        </div>
+        <div className='p-2 sm:p-3 bg-zinc-950 w-20 sm:w-28 md:w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary text-center'>
+          <p className='text-xl sm:text-3xl md:text-6xl font-semibold'>{timeCounter.minutes}</p>
+          <p className='text-xs sm:text-base md:text-lg text-primary font-bold mt-1'>Minutes</p>
+        </div>
+        <div className='p-2 sm:p-3 bg-zinc-950 w-20 sm:w-28 md:w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary text-center'>
+          <p className='text-xl sm:text-3xl md:text-6xl font-semibold'>{timeCounter.seconds}</p>
+          <p className='text-xs sm:text-base md:text-lg text-primary font-bold mt-1'>Seconds</p>
         </div>
       </div>
 
-    </>
-  );
+
+      {/* <div className="m-auto w-full md:w-5/6 lg:w-4/6 p-10 flex gap-2 md:gap-9 items-center justify-center mt-8 md:mt-16">
+        <div className='p-3 bg-zinc-950 w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary'>
+          <p className='text-3xl sm:text-4xl md:text-6xl font-semibold'>{timeCounter.day}</p>
+          <p className='text-sm sm:text-base md:text-lg text-primary font-bold mt-1'>Days</p>
+        </div>
+        <div className='p-3 bg-zinc-950 w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary'>
+          <p className='text-3xl sm:text-4xl md:text-6xl font-semibold'>{timeCounter.hours}</p>
+          <p className='text-sm sm:text-base md:text-lg font-bold text-primary mt-1'>Hours</p>
+        </div>
+        <div className='p-3 bg-zinc-950 w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary'>
+          <p className='text-3xl sm:text-4xl md:text-6xl font-semibold'>{timeCounter.minutes}</p>
+          <p className='text-sm sm:text-base md:text-lg text-primary font-bold mt-1'>Minutes</p>
+        </div>
+        <div className='p-3 bg-zinc-950 w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary'>
+          <p className='text-3xl sm:text-4xl md:text-6xl font-semibold'>{timeCounter.seconds}</p>
+          <p className='text-sm sm:text-base md:text-lg text-primary font-bold mt-1'>Seconds</p>
+        </div> */}
+
+        {/* Events Carousel Section */}
+        <div className="m-auto w-full md:w-5/6 lg:w-4/6 p-10">
+          <div className="flex flex-col items-start">
+            <h2 className="text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold mt-8">
+              Events
+            </h2>
+            <div className="mx-2 w-10 h-1 text-center bg-primary"></div>
+          </div>
+
+          {/* Carousel Container */}
+          <div className="relative flex flex-col items-center mt-10 w-full px-4">
+            <div className="relative w-full max-w-3xl aspect-[3/2] overflow-hidden mx-auto bg-black rounded-lg flex items-center justify-center">
+              {/* Carousel Content */}
+              <div
+                className="flex transition-transform duration-500 ease-in-out h-full"
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              >
+                {formData?.events.map((event, index) => (
+                  <div
+                    key={index}
+                    className="w-full flex-shrink-0 h-full flex items-center justify-center"
+                  >
+                    <Link to={`/event/${event?._id}`} className="block w-full h-full">
+                      <img
+                        src={event.imgUrl}
+                        alt={event.name}
+                        className="w-full h-full object-contain rounded-lg p-4 
+                           max-h-[250px] sm:max-h-[300px] md:max-h-[350px] lg:max-h-[400px] 
+                           mx-auto"
+                      />
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation Buttons */}
+            <button
+              onClick={prevSlide}
+              className="absolute top-1/2 left-2 md:left-4 z-10 bg-base-100 -translate-y-1/2 
+                 border-primary border text-sm md:text-xl w-8 h-8 md:w-12 md:h-12 
+                 text-primary p-2 rounded-full hover:bg-primary hover:text-white transition"
+            >
+              ❮
+            </button>
+            <button
+              onClick={nextSlide}
+              className="absolute top-1/2 right-2 md:right-4 z-10 bg-base-100 -translate-y-1/2 
+                 border-primary border text-sm md:text-xl w-8 h-8 md:w-12 md:h-12 
+                 text-primary p-2 rounded-full hover:bg-primary hover:text-white transition"
+            >
+              ❯
+            </button>
+          </div>
+        </div>
+
+      </>
+      );
 };
 
-export default Home;
+      export default Home;

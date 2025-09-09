@@ -269,6 +269,29 @@ const Registration = () => {
                         ))}
                     </fieldset>
 
+                    <fieldset className="fieldset p-3 bg-base-100 border border-primary rounded-lg w-full">
+                        <legend className="font-bold md:text-sm text-xs text-primary">
+                            Join Our WhatsApp Group
+                        </legend>
+
+                        <p className="text-xs sm:text-sm md:text-base mb-2">
+                            Stay updated with all event details by joining our official WhatsApp group:
+                        </p>
+
+                        <a
+                            href="https://chat.whatsapp.com/F5J6ixyVDkS0prjH2kdLME?mode=ems_share_t"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block text-xs sm:text-sm md:text-base
+               text-primary border border-primary font-bold
+               px-4 sm:px-6 py-2 rounded-full
+               hover:bg-primary hover:text-white transition"
+                        >
+                            👉 Join WhatsApp Group
+                        </a>
+                    </fieldset>
+
+
                     <div className='flex justify-center'>
                         <button
                             type="submit"

@@ -81,8 +81,8 @@ const EventRule = () => {
                           key={idx}
                           className="flex items-center gap-2 leading-relaxed mt-1"
                         >
-                          <CheckCircle className="text-primary w-3 h-3 sm:w-5 sm:h-5 flex-shrink-0" />
-                                           <span className="text-xs sm:text-sm md:text-base text-white opacity-90">
+                          <CheckCircle className="text-primary w-3 h-3 sm:w-5 sm:h-5 flex-shrink-0 mt-1" />
+                                           <span className="text-sm md:text-base text-white opacity-90">
                                              {rule}
                                            </span>
                         </li>
