@@ -25,15 +25,17 @@ const EventRule = () => {
     <div className="flex justify-center items-center flex-col w-full mx-auto md:w-5/6 lg:w-4/6 p-6 md:p-10 text-white">
       {/* ✅ Header */}
       <div className="flex flex-col items-center">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-center">{event?.name}</h2>
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-center">
+          {event?.name}
+        </h2>
         <div className="mx-10 w-16 h-1 bg-primary rounded mt-2"></div>
       </div>
 
-      <p className="text-sm md:text-base text-center my-4 opacity-80">
+      <p className="text-sm sm:text-base md:text-lg text-center my-4 opacity-80">
         {event?.description}
       </p>
 
- <div className="mt-4 border border-zinc-800 w-full"></div>
+      <div className="mt-4 border border-zinc-800 w-full"></div>
 
       {/* ✅ Rules Section */}
       <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mt-6 mb-4 text-primary text-center sm:text-left">
@@ -71,16 +73,18 @@ const EventRule = () => {
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="px-4 sm:px-6 pb-4"
+                    className="px-3 sm:px-6 pb-4"
                   >
-                    <ul className="space-y-2 sm:space-y-3 text-sm md:text-base">
+                    <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base md:text-lg">
                       {round.rules.map((rule, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start gap-2 leading-relaxed mt-1"
+                          className="flex items-center gap-2 leading-relaxed mt-1"
                         >
-                          <CheckCircle className="text-primary w-4 h-4 sm:w-5 sm:h-5 mt-0.5 flex-shrink-0" />
-                          <span>{rule}</span>
+                          <CheckCircle className="text-primary w-3 h-3 sm:w-5 sm:h-5 flex-shrink-0" />
+                                           <span className="text-xs sm:text-sm md:text-base text-white opacity-90">
+                                             {rule}
+                                           </span>
                         </li>
                       ))}
                     </ul>
@@ -94,10 +98,10 @@ const EventRule = () => {
 
       {/* ✅ Event Info */}
       <div className="p-6 mt-8 w-full shadow-lg">
-        <h3 className="text-lg md:text-xl font-semibold text-primary mb-4">
+        <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-primary mb-4">
           Event Details
         </h3>
-        <ul className="space-y-3 text-sm md:text-base">
+        <ul className="space-y-3 text-sm sm:text-base md:text-lg">
           <li className="flex items-center gap-2">
             <i className="fa-solid fa-calendar-days text-primary"></i>
             <span className="text-primary">Date :</span>
@@ -117,10 +121,15 @@ const EventRule = () => {
       </div>
 
       {/* ✅ Register Button */}
-       <div className="flex justify-center mt-8">
+      <div className="flex justify-center mt-8">
         <Link
           to="/register"
-          className="text-xs sm:text-sm md:text-base text-primary border border-primary hover:text-white hover:bg-primary font-bold px-6 sm:px-8 py-2.5 sm:py-3 rounded-full transition text-center w-full sm:w-auto"
+          className="text-xs sm:text-sm md:text-base lg:text-lg 
+             text-primary border border-primary font-bold
+             px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 
+             rounded-full mt-4 sm:mt-5
+             hover:bg-primary hover:text-white transition
+             w-auto sm:w-fit"
         >
           Register
         </Link>
@@ -130,6 +139,7 @@ const EventRule = () => {
 }
 
 export default EventRule
+
 
 
 // import React, { useContext, useEffect, useState } from 'react'

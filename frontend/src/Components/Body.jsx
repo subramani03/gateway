@@ -5,6 +5,7 @@ import Footer from './Footer'
 import FormContext from '../Utils/FormContext'
 
 
+
 const Body = () => {
 
   const { formData } = useContext(FormContext);
@@ -14,6 +15,10 @@ const Body = () => {
       document.title = formData.name; // Change title
     } else {
       document.title = "Event title"; // Fallback title
+    }
+    const favicon = document.getElementById("favicon");
+    if (favicon) {
+      favicon.href = formData?.logo || "/psgDiamondLogo.png"; // fallback logo
     }
   }, [formData]);
 

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import clg_logo from '../assets/clg_logo.avif';
-import  psgDimondlogo from '../assets/psgDiamondLogo.png';
+import psgDimondlogo from '../assets/psgDiamondLogo.png';
 import bgvideo from '../assets/021794daa81f80dbf49fc06af2091714 (1).mp4';
 // import gateway_logo from '../assets/gateway_logo.png';
 import FormContext from '../Utils/FormContext';
@@ -88,7 +88,7 @@ const Home = () => {
         <div className="relative h-full flex flex-col justify-center items-center m-auto w-full md:w-5/6 lg:w-4/6 text-white z-20">
           <div className="flex items-center justify-around w-full mt-5 sm:mt-1">
             <img src={clg_logo} alt="College Logo" className="w-10 md:w-12 lg:w-16 rounded-md" />
-            <h2 className="text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold text-white">
+            <h2 className="text-md sm:text-2xl md:text-2xl lg:text-3xl font-semibold text-white">
               PSG COLLEGE OF ARTS & SCIENCE
             </h2>
             <img src={psgDimondlogo} alt="ISO Certification" className="w-16 md:w-24 rounded-md" />
@@ -103,22 +103,30 @@ const Home = () => {
             <p>CIVIL AERODROME POST, COIMBATORE-641 014</p>
           </div> */}
 
-          <h3 className="text-lg sm:text-2xl md:text-2xl lg:text-3xl font-semibold mt-5 mb-3 text-primary">
+          <h3 className="text-md sm:text-2xl md:text-2xl lg:text-3xl font-semibold mt-5 mb-3 text-primary">
             {formData?.organizers}
           </h3>
           <h6 className="text-xs md:text-sm font-mono"> {formData?.organizers_description}</h6>
           <h4 className="text-lg font-semibold">Organizes</h4>
           <div className="flex items-center justify-center mt-5 sm:mt-2">
-            <img src={formData?.logo} alt="Gateway Logo" className="w-20 md:w-28 rounded-full h-20 md:h-28" />
-            <p className='text-3xl sm:text-4xl md:text-5xl my-4 text-primary text-center font-serif ' style={{ textShadow: "1px 1px 4px #00fff5" }}><b>{formData?.name.toUpperCase()}</b></p>
+            <img src={formData?.logo} alt="Gateway Logo" className="w-16 sm:w-20 md:w-28 rounded-full h-16 sm:h-20 md:h-28" />
+            <p className='text-2xl sm:text-4xl md:text-5xl my-4 text-primary text-center font-serif ' style={{ textShadow: "1px 1px 4px #00fff5" }}><b>{formData?.name.toUpperCase()}</b></p>
           </div>
           <p className="text-xs sm:text-lg md:text-xl font-semibold -mt-3">
             {formData?.description}
           </p>
           <Link to="/event">
-            <button className=" text-primary border border-primary font-bold px-6 py-2 rounded-full mt-5  hover:bg-primary hover:text-white transition">
+            <button
+              className="text-xs sm:text-sm md:text-base lg:text-lg 
+             text-primary border border-primary font-bold
+             px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-2.5 
+             rounded-full mt-4 sm:mt-5
+             hover:bg-primary hover:text-white transition
+             w-auto sm:w-fit"
+            >
               Register
             </button>
+
           </Link>
         </div>
       </div>
@@ -126,27 +134,25 @@ const Home = () => {
 
 
       {/* counttown */}
-      <div className="m-auto w-full md:w-5/6 lg:w-4/6 p-10 flex gap-2  md:gap-9 items-center justify-center mt-8 md:mt-16">
-        <div className='p-3 bg-zinc-950 w-36 flex justify-center items-center flex-col rounded-lg shadow-sm  shadow-primary'>
-          <p className='text-3xl sm:text-4xl md:text-6xl font-semibold'>{timeCounter.day}</p>
-          <p className='text-sm sm:text-base md:text-lg text-primary font-bold mt-1'>Days</p>
-        </div>
-        <div className='p-3 bg-zinc-950 w-36 flex justify-center items-center flex-col rounded-lg shadow-sm  shadow-primary'>
-          <p className='text-3xl sm:text-4xl md:text-6xl font-semibold'>{timeCounter.hours}</p>
-          <p className='text-sm sm:text-base md:text-lg font-bold  text-primary mt-1'>Hours</p>
-        </div>
-        <div className='p-3 bg-zinc-950 w-36 flex justify-center items-center flex-col rounded-lg shadow-sm  shadow-primary'>
-          <p className='text-3xl sm:text-4xl md:text-6xl font-semibold'>{timeCounter.minutes}</p>
-          <p className='text-sm sm:text-base md:text-lg  text-primary font-bold mt-1'>Minutes</p>
-        </div>
-        <div className='p-3 bg-zinc-950 w-36 flex justify-center items-center flex-col rounded-lg shadow-sm  shadow-primary'>
-          <p className='text-3xl sm:text-4xl md:text-6xl font-semibold'>{timeCounter.seconds}</p>
-          <p className='text-sm sm:text-base md:text-lg  text-primary font-bold mt-1'>Seconds</p>
-        </div>
+      <div className="m-auto w-full md:w-5/6 lg:w-4/6 p-4 sm:p-6 md:p-10 flex gap-2 sm:gap-4 md:gap-9 items-center justify-center mt-6 md:mt-16">
+  <div className='p-2 sm:p-3 bg-zinc-950 w-20 sm:w-28 md:w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary text-center'>
+    <p className='text-xl sm:text-3xl md:text-6xl font-semibold'>{timeCounter.day}</p>
+    <p className='text-xs sm:text-base md:text-lg text-primary font-bold mt-1'>Days</p>
+  </div>
+  <div className='p-2 sm:p-3 bg-zinc-950 w-20 sm:w-28 md:w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary text-center'>
+    <p className='text-xl sm:text-3xl md:text-6xl font-semibold'>{timeCounter.hours}</p>
+    <p className='text-xs sm:text-base md:text-lg text-primary font-bold mt-1'>Hours</p>
+  </div>
+  <div className='p-2 sm:p-3 bg-zinc-950 w-20 sm:w-28 md:w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary text-center'>
+    <p className='text-xl sm:text-3xl md:text-6xl font-semibold'>{timeCounter.minutes}</p>
+    <p className='text-xs sm:text-base md:text-lg text-primary font-bold mt-1'>Minutes</p>
+  </div>
+  <div className='p-2 sm:p-3 bg-zinc-950 w-20 sm:w-28 md:w-36 flex justify-center items-center flex-col rounded-lg shadow-sm shadow-primary text-center'>
+    <p className='text-xl sm:text-3xl md:text-6xl font-semibold'>{timeCounter.seconds}</p>
+    <p className='text-xs sm:text-base md:text-lg text-primary font-bold mt-1'>Seconds</p>
+  </div>
+</div>
 
-
-
-      </div>
 
       {/* Events Carousel Section */}
       <div className="m-auto w-full md:w-5/6 lg:w-4/6 p-10">
@@ -203,10 +209,6 @@ const Home = () => {
           </button>
         </div>
       </div>
-
-
-
-
 
     </>
   );

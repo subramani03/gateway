@@ -79,7 +79,7 @@ const Event = () => {
             />
           </figure>
           <div className="p-4 flex flex-col flex-grow">
-            <h2 className="text-primary font-semibold text-lg truncate">
+            <h2 className="text-primary font-semibold text-sm md:text-base lg:text-lg truncate">
               {event.name}
             </h2>
             <p className="text-xs sm:text-sm text-white opacity-80 mt-2 line-clamp-3">
@@ -94,8 +94,8 @@ const Event = () => {
 
 
         {/* ✅ Advanced General Rules Section */}
-        <div className="w-full md:w-5/6 lg:w-4/6 mx-auto mt-10 px-10">
-          <div className="bg-zinc-900/70 backdrop-blur-md border border-zinc-700 rounded-2xl shadow-lg p-6 sm:p-8">
+        <div className="w-full md:w-5/6 lg:w-4/6 mx-auto mt-10 px-5">
+          <div className="bg-zinc-900/70 backdrop-blur-md border border-zinc-700 rounded-2xl shadow-lg p-3 sm:p-6">
             <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-center text-primary mb-6">
               General Rules
             </h3>
@@ -105,10 +105,10 @@ const Event = () => {
                   key={idx}
                   whileHover={{ scale: 1.03 }}
                   transition={{ type: 'spring', stiffness: 150 }}
-                  className="flex items-center gap-3 bg-zinc-800/50 border border-zinc-700 rounded-xl p-3 sm:p-4 hover:border-primary transition"
+                  className="flex items-center gap-1 sm:gap-3 bg-zinc-800/50 border border-zinc-700 rounded-xl p-2 sm:p-4 hover:border-primary transition"
                 >
-                  <CheckCircle className="text-primary w-5 h-5 flex-shrink-0" />
-                  <span className="text-sm sm:text-base text-white opacity-90">
+                  <CheckCircle className="text-primary w-3 h-3 sm:w-5 sm:h-5 flex-shrink-0" />
+                  <span className="text-xs sm:text-sm md:text-base text-white opacity-90">
                     {rule}
                   </span>
                 </motion.div>
