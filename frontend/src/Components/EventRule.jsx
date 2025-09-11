@@ -101,7 +101,7 @@ const EventRule = () => {
         <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-primary mb-4">
           Event Details
         </h3>
-        <ul className="space-y-3 text-sm sm:text-base md:text-lg">
+        {/* <ul className="space-y-3 text-sm sm:text-base md:text-lg">
           <li className="flex items-center gap-2">
             <i className="fa-solid fa-calendar-days text-primary"></i>
             <span className="text-primary">Date :</span>
@@ -117,7 +117,40 @@ const EventRule = () => {
             <span className="text-primary">Venue :</span>
             {event?.venue}
           </li>
-        </ul>
+        </ul> */}
+
+        <ul className="space-y-3 text-sm sm:text-base md:text-lg">
+  <li className="flex items-center gap-2">
+    <i className="fa-solid fa-calendar-days text-primary"></i>
+    <span className="text-primary">Date :</span>
+    {event?.date
+      ? new Date(event.date).toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric"
+        })
+      : "Not available"}
+  </li>
+
+  <li className="flex items-center gap-2">
+    <i className="fa-solid fa-clock text-primary"></i>
+    <span className="text-primary">Time :</span>
+    {event?.time
+      ? new Date(`2000-01-01T${event.time}`).toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true
+        })
+      : "Not available"}
+  </li>
+
+  <li className="flex items-center gap-2">
+    <i className="fa-solid fa-location-dot text-primary"></i>
+    <span className="text-primary">Venue :</span>
+    {event?.venue || "Not available"}
+  </li>
+</ul>
+
       </div>
 
       {/* ✅ Register Button */}
